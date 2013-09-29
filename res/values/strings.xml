@@ -11,7 +11,8 @@
     <string name="settingsButton">Settings</string>
     <string name="manager_home">Manager Home</string>
     <string name="title_activity_character_list">CharacterListActivity</string>
-    <string name="title_activity_add_character">AddCharacterActivity</string>
+    <string name="title_activity_add_character">Create Character</string>
     <string name="characterName">Character Name</string>
+    <string name="title_activity_view_character">ViewCharacterActivity</string>
 
 </resources>

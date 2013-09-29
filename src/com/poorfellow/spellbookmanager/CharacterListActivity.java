@@ -1,5 +1,7 @@
 package com.poorfellow.spellbookmanager;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,8 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.support.v4.app.NavUtils;
 
+import com.poorfellow.spellbookmanager.database.DatabaseObject;
 import com.poorfellow.spellbookmanager.dummy.DummyContent;
 import com.poorfellow.spellbookmanager.character.CharacterDAO;
+import com.poorfellow.spellbookmanager.character.Character;
 
 
 public class CharacterListActivity extends Activity {
@@ -23,6 +27,7 @@ public class CharacterListActivity extends Activity {
 	private RelativeLayout mParentLayout;
 	private LinearLayout mCharacterButtonContainer;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,9 +41,29 @@ public class CharacterListActivity extends Activity {
 		mCharacterButtonContainer = (LinearLayout) findViewById(R.id.characterButtonContainer);
 		
         Log.d("CharacterListActivity", "My character button container is " + mCharacterButtonContainer);
-		
+        
+        CharacterDAO charDAO = new CharacterDAO(this);         
+        List<? extends DatabaseObject> characterObjects = charDAO.getAllRows();
+        List<Character> characters = (List<Character>) (List<?>)characterObjects;
+        
+        for (final Character character : characters) {
+        	Button characterButton = new Button(this);
+        	characterButton.setText(character.getName());
+        	characterButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(CharacterListActivity.this, ViewCharacterActivity.class);
+					i.putExtra("character", character);
+					startActivity(i);
+				}
+			});
+        	mCharacterButtonContainer.addView(characterButton);
+        }
+        
         Button addCharButton = new Button(this);
+        addCharButton.setText("Create New Character");
         addCharButton.setOnClickListener(new View.OnClickListener() {
+        	@Override
         	public void onClick(View v) {
         		Intent i = new Intent(CharacterListActivity.this, AddCharacterActivity.class);
         		startActivity(i);
@@ -46,26 +71,7 @@ public class CharacterListActivity extends Activity {
         });
         mCharacterButtonContainer.addView(addCharButton);
 		
-		//Hook up database, get character list, for now lets just create dummy buttons
-		/*Button char1 = new Button(this);
-		Button char2 = new Button(this);
-		Button char3 = new Button(this);
 		
-		
-	
-		char1.setText("Yousseff");
-		char2.setText("Alton");
-		char3.setText("Beznik");
-		addChar.setText("Add New Character");
-		
-		mCharacterButtonContainer.addView(char1);
-		mCharacterButtonContainer.addView(char2);
-		mCharacterButtonContainer.addView(char3);
-		*/
-
-		
-		
-
 	}
 
 	/**

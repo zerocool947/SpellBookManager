@@ -1,8 +1,25 @@
 package com.poorfellow.spellbookmanager.character;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.Serializable;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import android.util.Log;
+
 import com.poorfellow.spellbookmanager.database.DatabaseObject;
 
-public class Character implements DatabaseObject{
+@SuppressWarnings("serial")
+public class Character implements DatabaseObject, Serializable {
 	
 	private String name;
 	private long id;
@@ -35,6 +52,45 @@ public class Character implements DatabaseObject{
 		this.constitution = constitution;
 		this.turnAttempts = turnAttempts;
 				 
+	}
+
+	public Character(long id, String name, byte[] data) {
+		this.id = id;
+		this.name = name;
+		DocumentBuilder docBuilder;
+		try {
+			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = docBuilder.parse(new ByteArrayInputStream(data));
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			
+			this.level = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CHARACTER_LEVEL).evaluate(doc));
+			this.characterClass = xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CHARACTER_CLASS).evaluate(doc);
+			this.race = xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CHARACTER_CLASS).evaluate(doc);
+			this.casterLevel = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CASTER_LEVEL).evaluate(doc));
+			this.turnAttempts = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.TURN_ATTEMPTS).evaluate(doc));
+			this.dexterity = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.DEXTERITY).evaluate(doc));
+			this.intelligence = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.INTELLIGENCE).evaluate(doc));
+			this.strength = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.STRENGTH).evaluate(doc));
+			this.charisma = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.CHARISMA).evaluate(doc));
+			this.wisdom = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.WISDOM).evaluate(doc));
+			this.constitution = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.CONSTITUTION).evaluate(doc));
+			
+		} catch (ParserConfigurationException e) {
+			Log.e("Error Instantiating Document Builder", e.getMessage());
+			e.printStackTrace();
+		} catch (SAXException e) {
+			Log.e("Error Instantiating Document Builder", e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			Log.e("Error Instantiating Document Builder", e.getMessage());
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			Log.e("Error parsing blob", e.getMessage());
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
+			Log.e("Error parsing blob", e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	@Override

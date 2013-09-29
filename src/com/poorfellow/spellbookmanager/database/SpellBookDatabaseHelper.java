@@ -17,19 +17,19 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 		String characterTableQueryString = "create table " +
 				SpellBookDatabaseManager.CHARACTER_TABLE_NAME + 
 				" (" +
-				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_ID + "integer primary key autoincrement not null," +
+				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_ID + " integer primary key autoincrement not null ," +
 				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_NAME + " text," +
-				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_DATA + "blob" +
+				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_DATA + " blob" +
 				");";
 		
 		db.execSQL(characterTableQueryString);
 		
-		String spellTableQueryString = "create_table " +
+		String spellTableQueryString = "create table " +
 				SpellBookDatabaseManager.SPELL_TABLE_NAME + 
 				" (" + 
-				SpellBookDatabaseManager.SPELL_TABLE_ROW_ID + "integer primary key autoincrement not null," +
-				SpellBookDatabaseManager.SPELL_TABLE_ROW_NAME + "text," +
-				SpellBookDatabaseManager.SPELL_TABLE_ROW_DATA + "blob" + //Not sure about this blob creation
+				SpellBookDatabaseManager.SPELL_TABLE_ROW_ID + " integer primary key autoincrement not null," +
+				SpellBookDatabaseManager.SPELL_TABLE_ROW_NAME + " text," +
+				SpellBookDatabaseManager.SPELL_TABLE_ROW_DATA + " blob" + //Not sure about this blob creation
 				");";
 		db.execSQL(spellTableQueryString);
 

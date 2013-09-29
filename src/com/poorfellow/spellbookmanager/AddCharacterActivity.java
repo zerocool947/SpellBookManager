@@ -50,7 +50,6 @@ public class AddCharacterActivity extends Activity {
 				onCreateCharacterClicked();
 				finish();
 			}
-
 		});
 	}
 	
@@ -68,12 +67,9 @@ public class AddCharacterActivity extends Activity {
 		int constitution = Integer.parseInt(mConstitutionEdit.getText().toString());
 		int turnAttempts = Integer.parseInt(mTurnAttemptsEdit.getText().toString());
 		
-		
-		CharacterDAO charDAO = new CharacterDAO(getBaseContext());
+		CharacterDAO charDAO = new CharacterDAO(this);
 		charDAO.CreateCharacter(name, level, characterClass, race, casterLevel, dexterity, intelligence, strength, 
-				charisma, wisdom, constitution, turnAttempts);
-		
-		
+				charisma, wisdom, constitution, turnAttempts);		
 		
 	}
 
