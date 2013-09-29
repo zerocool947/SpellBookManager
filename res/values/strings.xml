@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SpellBook Manager</string>
+    <string name="title_category_detail">Category Detail</string>
+    <string name="title_activity_home_page">Spellbook Manager</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="charactersButton">Characters</string>
+    <string name="masterListButton">Master Spell List</string>
+    <string name="settingsButton">Settings</string>
+    <string name="manager_home">Manager Home</string>
+    <string name="title_activity_character_list">CharacterListActivity</string>
+    <string name="title_activity_add_character">AddCharacterActivity</string>
+    <string name="characterName">Character Name</string>
+
+</resources>
