@@ -1,4 +1,4 @@
-poorfellow
+SpellBookManager
 ==========
 
 For Golyadkin
