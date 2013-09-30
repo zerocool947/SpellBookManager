@@ -191,7 +191,7 @@
         android:text="Charisma" />
 
     <Button
-        android:id="@+id/createCharacter"
+        android:id="@+id/createCharacterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/charisma"
@@ -202,22 +202,20 @@
         android:id="@+id/characterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/characterNameView"
-        android:layout_alignBottom="@+id/characterNameView"
-        android:layout_toRightOf="@+id/createCharacter"
+        android:layout_alignLeft="@+id/createCharacterButton"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="113dp"
+        android:layout_marginTop="30dp"
         android:ems="7"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/characterNameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="73dp"
-        android:layout_toLeftOf="@+id/createCharacter"
+        android:layout_alignBottom="@+id/characterName"
+        android:layout_marginRight="64dp"
+        android:layout_toLeftOf="@+id/characterLevel"
         android:text="Character Name" />
 
 </RelativeLayout>

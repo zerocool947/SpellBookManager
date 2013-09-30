@@ -30,7 +30,7 @@ public class AddCharacterActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_character);
 		
-		mCreateCharacterButton = (Button) findViewById(R.id.createCharacter);
+		mCreateCharacterButton = (Button) findViewById(R.id.createCharacterButton);
 		mCharacterNameEdit = (EditText) findViewById(R.id.characterName);
 		mCharacterLevelEdit = (EditText) findViewById(R.id.characterLevel);
 		mCasterLevelEdit = (EditText) findViewById(R.id.casterLevel);
