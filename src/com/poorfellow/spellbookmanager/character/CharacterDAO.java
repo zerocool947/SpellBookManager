@@ -30,7 +30,7 @@ import com.poorfellow.spellbookmanager.database.SpellBookDatabaseManager;
 
 public class CharacterDAO implements SpellBookDatabaseManager {
 	
-	public static final String CHARACTER = "character";
+	public static final String NAME = "name";
 	public static final String CHARACTER_LEVEL = "level";
 	public static final String CHARACTER_CLASS = "class";
 	public static final String RACE = "race";
@@ -75,7 +75,7 @@ public class CharacterDAO implements SpellBookDatabaseManager {
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			
 			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement(CHARACTER);
+			Element rootElement = doc.createElement(NAME);
 			rootElement.appendChild(doc.createTextNode(character.getName()));
 			doc.appendChild(rootElement);
 			

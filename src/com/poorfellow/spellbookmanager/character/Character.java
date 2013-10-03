@@ -63,17 +63,17 @@ public class Character implements DatabaseObject, Serializable {
 			Document doc = docBuilder.parse(new ByteArrayInputStream(data));
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			
-			this.level = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CHARACTER_LEVEL).evaluate(doc));
-			this.characterClass = xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CHARACTER_CLASS).evaluate(doc);
-			this.race = xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CHARACTER_CLASS).evaluate(doc);
-			this.casterLevel = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.CASTER_LEVEL).evaluate(doc));
-			this.turnAttempts = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.TURN_ATTEMPTS).evaluate(doc));
-			this.dexterity = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.DEXTERITY).evaluate(doc));
-			this.intelligence = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.INTELLIGENCE).evaluate(doc));
-			this.strength = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.STRENGTH).evaluate(doc));
-			this.charisma = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.CHARISMA).evaluate(doc));
-			this.wisdom = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.WISDOM).evaluate(doc));
-			this.constitution = Integer.parseInt(xPath.compile("/"+CharacterDAO.CHARACTER+"/"+CharacterDAO.STATS+"/"+CharacterDAO.CONSTITUTION).evaluate(doc));
+			this.level = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.CHARACTER_LEVEL).evaluate(doc));
+			this.characterClass = xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.CHARACTER_CLASS).evaluate(doc);
+			this.race = xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.CHARACTER_CLASS).evaluate(doc);
+			this.casterLevel = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.CASTER_LEVEL).evaluate(doc));
+			this.turnAttempts = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.TURN_ATTEMPTS).evaluate(doc));
+			this.dexterity = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.STATS+"/"+CharacterDAO.DEXTERITY).evaluate(doc));
+			this.intelligence = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.STATS+"/"+CharacterDAO.INTELLIGENCE).evaluate(doc));
+			this.strength = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.STATS+"/"+CharacterDAO.STRENGTH).evaluate(doc));
+			this.charisma = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.STATS+"/"+CharacterDAO.CHARISMA).evaluate(doc));
+			this.wisdom = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.STATS+"/"+CharacterDAO.WISDOM).evaluate(doc));
+			this.constitution = Integer.parseInt(xPath.compile("/"+CharacterDAO.NAME+"/"+CharacterDAO.STATS+"/"+CharacterDAO.CONSTITUTION).evaluate(doc));
 			
 		} catch (ParserConfigurationException e) {
 			Log.e("Error Instantiating Document Builder", e.getMessage());
