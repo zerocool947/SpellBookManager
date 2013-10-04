@@ -31,6 +31,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_NAME + " text," +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_SCHOOL + " text," + 
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_SUBSCHOOL + " text," +
+				SpellBookDatabaseManager.SPELL_TABLE_ROW_DESCRIPTOR + " text," +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_LEVEL + " text," + 
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_COMPONENTS + " text," +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_CASTING_TIME + " text," + 
@@ -54,6 +55,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_NAME + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_SCHOOL + ", " + 
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_SUBSCHOOL + ", " +
+				SpellBookDatabaseManager.SPELL_TABLE_ROW_DESCRIPTION + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_LEVEL + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_COMPONENTS + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_CASTING_TIME + ", " +
