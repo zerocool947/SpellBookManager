@@ -13,6 +13,7 @@ public class Spell implements DatabaseObject, Serializable {
 	private String level;
 	private String components;
 	private String castingTime;
+	private String target;
 	private String range;
 	private String effect;
 	private String duration;

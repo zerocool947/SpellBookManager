@@ -59,6 +59,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_LEVEL + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_COMPONENTS + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_CASTING_TIME + ", " +
+				SpellBookDatabaseManager.SPELL_TABLE_ROW_TARGET + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_RANGE + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_EFFECT + ", " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_DURATION + ", " +
@@ -73,6 +74,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				"\'${spellResistance}\',\'${description}\',\'${materialComponent}\',\'${focus}\'" +
 				");";
 		db.execSQL(acidArrowQueryString);
+		
 	}
 
 	@Override
