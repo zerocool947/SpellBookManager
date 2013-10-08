@@ -39,39 +39,15 @@ public class CharacterListActivity extends Activity {
 		//hook up handle to UI framework
 		mHorizontalCharacterContainer = (HorizontalScrollView) findViewById(R.id.horizontalCharacterContainer);
 		mCharacterButtonContainer = (LinearLayout) findViewById(R.id.characterButtonContainer);
+		        
+		populateButtons();
 		
-        Log.d("CharacterListActivity", "My character button container is " + mCharacterButtonContainer);
-        
-        CharacterDAO charDAO = new CharacterDAO(this);         
-        List<? extends DatabaseObject> characterObjects = charDAO.getAllRows();
-        List<Character> characters = (List<Character>) (List<?>)characterObjects;
-        
-        for (final Character character : characters) {
-        	Button characterButton = new Button(this);
-        	characterButton.setText(character.getName());
-        	characterButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent i = new Intent(CharacterListActivity.this, ViewCharacterActivity.class);
-					i.putExtra("character", character);
-					startActivity(i);
-				}
-			});
-        	mCharacterButtonContainer.addView(characterButton);
-        }
-        
-        Button addCharButton = new Button(this);
-        addCharButton.setText("Create New Character");
-        addCharButton.setOnClickListener(new View.OnClickListener() {
-        	@Override
-        	public void onClick(View v) {
-        		Intent i = new Intent(CharacterListActivity.this, AddCharacterActivity.class);
-        		startActivity(i);
-        	}
-        });
-        mCharacterButtonContainer.addView(addCharButton);
-		
-		
+	}
+	
+	protected void onResume() {
+		super.onResume();
+		mCharacterButtonContainer.removeAllViews();
+		populateButtons();
 	}
 
 	/**
@@ -105,6 +81,38 @@ public class CharacterListActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+    @SuppressWarnings("unchecked")
+	private void populateButtons() {
+    	CharacterDAO charDAO = new CharacterDAO(this);         
+        List<? extends DatabaseObject> characterObjects = charDAO.getAllRows();
+		List<Character> characters = (List<Character>) (List<?>)characterObjects;
+        
+        for (final Character character : characters) {
+        	Button characterButton = new Button(this);
+        	characterButton.setText(character.getName());
+        	characterButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(CharacterListActivity.this, ViewCharacterActivity.class);
+					i.putExtra("character", character);
+					startActivity(i);
+				}
+			});
+        	mCharacterButtonContainer.addView(characterButton);
+        }
+        
+        Button addCharButton = new Button(this);
+        addCharButton.setText("Create New Character");
+        addCharButton.setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		Intent i = new Intent(CharacterListActivity.this, AddCharacterActivity.class);
+        		startActivity(i);
+        	}
+        });
+        mCharacterButtonContainer.addView(addCharButton);
 	}
 
 }
