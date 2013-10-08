@@ -31,7 +31,8 @@ public interface SpellBookDatabaseManager {
 	public static final String SPELL_TABLE_ROW_DESCRIPTION = "description";
 	public static final String SPELL_TABLE_ROW_MATERIAL_COMPONENT = "material_component";
 	public static final String SPELL_TABLE_ROW_FOCUS = "focus";
-	
+	public static final String SPELL_TABLE_ROW_XP_COST = "xp_cost";
+
 	public final static String SPELL_BLOCK_TABLE_NAME = "spell_blocks";
 	public final static String SPELL_BLOCK_ROW_ID = "id";
 	public final static String SPELL_BLOCK_ROW_BLOCK_NAME = "name";
@@ -46,10 +47,6 @@ public interface SpellBookDatabaseManager {
 	public final static String DAILY_LIST_ROW_TYPE = "type";
 	//make another table that's the list of spell IDs
 	//public final static String DAILY_LIST_ROW_DATA = "blob";
-	
-	//don't do "add row, delete row" etc
-	//do "Add Character, remove character, add spell
-	//then maybe make generic methods underneath that like "addrow"
 	
 	long addRow(DatabaseObject DBObject);
 	void removeRow(DatabaseObject DBObject);

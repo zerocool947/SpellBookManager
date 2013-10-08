@@ -17,7 +17,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 		String characterTableQueryString = "create table " +
 				SpellBookDatabaseManager.CHARACTER_TABLE_NAME + 
 				" (" +
-				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_ID + " integer primary key autoincrement not null ," +
+				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_ID + " integer primary key autoincrement not null," +
 				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_NAME + " text," +
 				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_DATA + " blob" +
 				");";
@@ -43,10 +43,11 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_DESCRIPTION + " text," + 
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_MATERIAL_COMPONENT + " text," + 
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_FOCUS + " text," +
+				SpellBookDatabaseManager.SPELL_TABLE_ROW_XP_COST + "text" + 
 				");";
 		db.execSQL(spellTableQueryString);
 		
-		String acidArrowQueryString = "insert into " +
+		/*String acidArrowQueryString = "insert into " +
 				SpellBookDatabaseManager.DB_NAME + 
 				"." +
 				SpellBookDatabaseManager.SPELL_TABLE_NAME + 
@@ -73,7 +74,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				"\'${castingTime}\',\'${range},\'${effect}\',\'${duration}\',\'${savingThrow}\'," +
 				"\'${spellResistance}\',\'${description}\',\'${materialComponent}\',\'${focus}\'" +
 				");";
-		db.execSQL(acidArrowQueryString);
+		db.execSQL(acidArrowQueryString);*/
 		
 	}
 
