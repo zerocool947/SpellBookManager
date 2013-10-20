@@ -48,6 +48,12 @@ public interface SpellBookDatabaseManager {
 	//make another table that's the list of spell IDs
 	//public final static String DAILY_LIST_ROW_DATA = "blob";
 	
+	public final static String SPELL_CLASS_LEVEL_TABLE_NAME= "spell_class_level";
+	public static final String SPELL_CLASS_LEVEL_ROW_ID = "id";
+	public final static String SPELL_CLASS_LEVEL_ROW_SPELL_ID = "spell_id";
+	public final static String SPELL_CLASS_LEVEL_ROW_CLASS = "class";
+	public final static String SPELL_CLASS_LEVEL_ROW_LEVEL = "level";
+	
 	long addRow(DatabaseObject DBObject);
 	void removeRow(DatabaseObject DBObject);
 	void removeRowByID(long id);
