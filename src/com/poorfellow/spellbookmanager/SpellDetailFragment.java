@@ -10,11 +10,11 @@ import android.widget.TextView;
 import com.poorfellow.spellbookmanager.dummy.DummyContent;
 
 /**
- * A fragment representing a single Category detail screen. This fragment is
- * either contained in a {@link CategoryListActivity} in two-pane mode (on
- * tablets) or a {@link CategoryDetailActivity} on handsets.
+ * A fragment representing a single Spell detail screen. This fragment is either
+ * contained in a {@link SpellListActivity} in two-pane mode (on tablets) or a
+ * {@link SpellDetailActivity} on handsets.
  */
-public class CategoryDetailFragment extends Fragment {
+public class SpellDetailFragment extends Fragment {
 	/**
 	 * The fragment argument representing the item ID that this fragment
 	 * represents.
@@ -30,7 +30,7 @@ public class CategoryDetailFragment extends Fragment {
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public CategoryDetailFragment() {
+	public SpellDetailFragment() {
 	}
 
 	@Override
@@ -49,12 +49,12 @@ public class CategoryDetailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_category_detail,
+		View rootView = inflater.inflate(R.layout.fragment_spell_detail,
 				container, false);
 
 		// Show the dummy content as text in a TextView.
 		if (mItem != null) {
-			((TextView) rootView.findViewById(R.id.category_detail))
+			((TextView) rootView.findViewById(R.id.spell_detail))
 					.setText(mItem.content);
 		}
 

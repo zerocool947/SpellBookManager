@@ -30,6 +30,14 @@ public class ManagerHome extends Activity {
 				startActivity(i);
 			}
 		});
+		
+		mMasterSpellButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(ManagerHome.this, SpellListActivity.class);
+				startActivity(i);
+			}
+		});
 	}
 
 	@Override

@@ -15,18 +15,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.poorfellow.spellbookmanager.CategoryListActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.poorfellow.spellbookmanager.CategoryDetailActivity"
-            android:label="@string/title_category_detail"
-            android:parentActivityName=".CategoryListActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CategoryListActivity" />
-        </activity>
-        <activity
             android:name="com.poorfellow.spellbookmanager.ManagerHome"
             android:label="@string/title_activity_home_page" >
             <intent-filter>
@@ -54,6 +42,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.poorfellow.spellbookmanager.CharacterListActivity" />
+        </activity>
+        <activity
+            android:name="com.poorfellow.spellbookmanager.SpellListActivity"
+            android:label="@string/title_spell_list"
+            android:parentActivityName="com.poorfellow.spellbookmanager.ManagerHome" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.poorfellow.spellbookmanager.ManagerHome" />
+        </activity>
+        <activity
+            android:name="com.poorfellow.spellbookmanager.SpellDetailActivity"
+            android:label="@string/title_spell_detail"
+            android:parentActivityName=".SpellListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SpellListActivity" />
         </activity>
     </application>
 

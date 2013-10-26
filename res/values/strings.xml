@@ -14,5 +14,7 @@
     <string name="title_activity_add_character">Create Character</string>
     <string name="characterName">Character Name</string>
     <string name="title_activity_view_character">ViewCharacterActivity</string>
+    <string name="title_spell_list">Spells</string>
+    <string name="title_spell_detail">Spell Detail</string>
 
 </resources>

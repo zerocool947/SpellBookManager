@@ -10,15 +10,15 @@ import android.widget.ListView;
 import com.poorfellow.spellbookmanager.dummy.DummyContent;
 
 /**
- * A list fragment representing a list of Categories. This fragment also
- * supports tablet devices by allowing list items to be given an 'activated'
- * state upon selection. This helps indicate which item is currently being
- * viewed in a {@link CategoryDetailFragment}.
+ * A list fragment representing a list of Spells. This fragment also supports
+ * tablet devices by allowing list items to be given an 'activated' state upon
+ * selection. This helps indicate which item is currently being viewed in a
+ * {@link SpellDetailFragment}.
  * <p>
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class CategoryListFragment extends ListFragment {
+public class SpellListFragment extends ListFragment {
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -63,7 +63,7 @@ public class CategoryListFragment extends ListFragment {
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public CategoryListFragment() {
+	public SpellListFragment() {
 	}
 
 	@Override

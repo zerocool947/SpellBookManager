@@ -25,9 +25,9 @@ public class DummyContent {
 
 	static {
 		// Add 3 sample items.
-		addItem(new DummyItem("1", "Characters"));
-		addItem(new DummyItem("2", "Master Spell List"));
-		addItem(new DummyItem("3", "Options"));
+		addItem(new DummyItem("1", "Item 1"));
+		addItem(new DummyItem("2", "Item 2"));
+		addItem(new DummyItem("3", "Item 3"));
 	}
 
 	private static void addItem(DummyItem item) {
