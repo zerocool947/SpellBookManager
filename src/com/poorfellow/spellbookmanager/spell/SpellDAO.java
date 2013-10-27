@@ -129,7 +129,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 							String className = levelCursor.getString(2);
 							int levelValue = levelCursor.getInt(3);
 							
-							level.put(className, new Integer(levelValue));
+							level.put(className, Integer.valueOf(levelValue));
 						}
 						while (levelCursor.moveToNext());
 					}
@@ -156,5 +156,77 @@ public class SpellDAO implements SpellBookDatabaseManager {
 		// TODO Auto-generated method stub
 
 	}
+
+	public Spell getSpellById(long spellId) {
+		db = DBHelper.getWritableDatabase();
+		Spell spell = null;
+		Cursor spellCursor;
+		
+		try {
+			spellCursor = db.query(SPELL_TABLE_NAME, 
+					null,SPELL_TABLE_ROW_ID + " = ?", 
+					new String[] {Long.toString(spellId)}, null, null, null);
+			spellCursor.moveToFirst();
+
+			if (!spellCursor.isAfterLast()) {
+				do {//maybe set with getColumnIndex later
+					String name = spellCursor.getString(1);
+					String school = spellCursor.getString(2);
+					String subschool = spellCursor.getString(3);
+					String descriptor = spellCursor.getString(4);
+					String components = spellCursor.getString(5);
+					String castingTime = spellCursor.getString(6);
+					String target = spellCursor.getString(7);
+					String range = spellCursor.getString(8);
+					String effect = spellCursor.getString(9);
+					String duration = spellCursor.getString(10);
+					String savingThrow = spellCursor.getString(11);
+					String spellResistance = spellCursor.getString(12);
+					String description = spellCursor.getString(13);
+					String materialComponent = spellCursor.getString(14);
+					String focus = spellCursor.getString(15);
+					String xpCost = spellCursor.getString(16);
+					Map<String, Integer> level = new HashMap<String, Integer>();
+					
+					Cursor levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,
+							null, SPELL_CLASS_LEVEL_ROW_SPELL_ID + " = ?", 
+							new String[] {Long.toString(spellId)}, null, null, null);
+					
+					levelCursor.moveToFirst();
+					
+					if (!levelCursor.isAfterLast()) {
+						do {
+							//long levelId = levelCursor.getLong(1);
+							//If I ever make this a class I'll use this
+							String className = levelCursor.getString(2);
+							int levelValue = levelCursor.getInt(3);
+							
+							level.put(className, Integer.valueOf(levelValue));
+						}
+						while (levelCursor.moveToNext());
+					}
+					
+					spell = new Spell(name, school, subschool, descriptor, 
+							level, components, castingTime, target, range, effect, 
+							duration, savingThrow, spellResistance, description, 
+							materialComponent, focus, xpCost);
+					
+					spell.setId(spellId);
+				}
+				while (spellCursor.moveToNext());
+			}
+		} catch (SQLException e) {
+			Log.e("DB Error", e.toString());
+			e.printStackTrace();
+		}
+		
+		return spell;
+	}
+
+	public Spell getSpellById(String spellId) {
+		// TODO Auto-generated method stub
+		return getSpellById(Long.valueOf(spellId));
+	}
+	
 	
 }

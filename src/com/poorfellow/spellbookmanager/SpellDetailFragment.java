@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.poorfellow.spellbookmanager.dummy.DummyContent;
+import com.poorfellow.spellbookmanager.spell.Spell;
+import com.poorfellow.spellbookmanager.spell.SpellDAO;
 
 /**
  * A fragment representing a single Spell detail screen. This fragment is either
@@ -25,6 +27,7 @@ public class SpellDetailFragment extends Fragment {
 	 * The dummy content this fragment is presenting.
 	 */
 	private DummyContent.DummyItem mItem;
+	private Spell mSpell;
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -43,6 +46,8 @@ public class SpellDetailFragment extends Fragment {
 			// to load content from a content provider.
 			mItem = DummyContent.ITEM_MAP.get(getArguments().getString(
 					ARG_ITEM_ID));
+			SpellDAO spellDAO = new SpellDAO(this.getActivity());
+			mSpell = spellDAO.getSpellById(getArguments().getString(ARG_ITEM_ID));
 		}
 	}
 
@@ -53,9 +58,13 @@ public class SpellDetailFragment extends Fragment {
 				container, false);
 
 		// Show the dummy content as text in a TextView.
-		if (mItem != null) {
+		/*if (mItem != null) {
 			((TextView) rootView.findViewById(R.id.spell_detail))
 					.setText(mItem.content);
+		}*/
+		if (mSpell != null) {
+			((TextView) rootView.findViewById(R.id.spell_detail))
+			.setText(mSpell.getName());
 		}
 
 		return rootView;
