@@ -20,4 +20,4 @@ local.properties
 .project
 
 # Eclipse settings folder
-.settings\
+.settings/
