@@ -1,5 +1,7 @@
 package com.poorfellow.spellbookmanager;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -7,7 +9,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.poorfellow.spellbookmanager.dummy.DummyContent;
+import com.poorfellow.spellbookmanager.spell.Spell;
+import com.poorfellow.spellbookmanager.spell.SpellDAO;
 
 /**
  * A list fragment representing a list of Spells. This fragment also supports
@@ -30,12 +33,14 @@ public class SpellListFragment extends ListFragment {
 	 * The fragment's current callback object, which is notified of list item
 	 * clicks.
 	 */
-	private Callbacks mCallbacks = sDummyCallbacks;
+	private Callbacks mCallbacks = sSpellCallbacks;
 
 	/**
 	 * The current activated item position. Only used on tablets.
 	 */
 	private int mActivatedPosition = ListView.INVALID_POSITION;
+	
+	private List<Spell> arrayAdapterSpells;
 
 	/**
 	 * A callback interface that all activities containing this fragment must
@@ -47,15 +52,20 @@ public class SpellListFragment extends ListFragment {
 		 * Callback for when an item has been selected.
 		 */
 		public void onItemSelected(String id);
+		public void onItemSelected(long id);
 	}
 
 	/**
 	 * A dummy implementation of the {@link Callbacks} interface that does
 	 * nothing. Used only when this fragment is not attached to an activity.
 	 */
-	private static Callbacks sDummyCallbacks = new Callbacks() {
+	private static Callbacks sSpellCallbacks = new Callbacks() {
 		@Override
 		public void onItemSelected(String id) {
+		}
+		
+		@Override
+		public void onItemSelected(long id) {
 		}
 	};
 
@@ -66,14 +76,21 @@ public class SpellListFragment extends ListFragment {
 	public SpellListFragment() {
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// TODO: replace with a real list adapter.
-		setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+		/*setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
 				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, DummyContent.ITEMS));
+				android.R.id.text1, DummyContent.ITEMS));*/
+		
+		SpellDAO spellDAO = new SpellDAO(this.getActivity());
+		arrayAdapterSpells = (List<Spell>) (List<?>) spellDAO.getAllRows();
+		final ArrayAdapter<Spell> spellsAdapter = new ArrayAdapter<Spell>(getActivity(),
+				android.R.layout.simple_list_item_1, android.R.id.text1, arrayAdapterSpells);
+		setListAdapter(spellsAdapter);
 	}
 
 	@Override
@@ -106,7 +123,7 @@ public class SpellListFragment extends ListFragment {
 		super.onDetach();
 
 		// Reset the active callbacks interface to the dummy implementation.
-		mCallbacks = sDummyCallbacks;
+		mCallbacks = sSpellCallbacks;
 	}
 
 	@Override
@@ -116,7 +133,8 @@ public class SpellListFragment extends ListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+		//mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+		mCallbacks.onItemSelected(arrayAdapterSpells.get(position).getId());
 	}
 
 	@Override

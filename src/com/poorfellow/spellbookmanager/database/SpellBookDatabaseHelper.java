@@ -1,9 +1,7 @@
 package com.poorfellow.spellbookmanager.database;
 
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
@@ -43,7 +41,6 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_SCHOOL + " text," + 
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_SUBSCHOOL + " text," +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_DESCRIPTOR + " text," +
-				SpellBookDatabaseManager.SPELL_TABLE_ROW_LEVEL + " text," + 
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_COMPONENTS + " text," +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_CASTING_TIME + " text," +  
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_TARGET + " text," + 
@@ -65,7 +62,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_ID + " integer primary key autoincrement not null," +
 				SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_SPELL_ID + " integer," + 
 				SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_CLASS + " text," +
-				SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_LEVEL + " text," +
+				SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_LEVEL + " integer," +
 				"FOREIGN KEY(" + 
 				SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_SPELL_ID + " ) REFERENCES " +
 				SpellBookDatabaseManager.SPELL_TABLE_ROW_NAME + "(" +

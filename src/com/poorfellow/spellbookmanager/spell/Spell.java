@@ -1,6 +1,7 @@
 package com.poorfellow.spellbookmanager.spell;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import com.poorfellow.spellbookmanager.database.DatabaseObject;
 
@@ -11,7 +12,8 @@ public class Spell implements DatabaseObject, Serializable {
 	private long id;
 	private String school;
 	private String subschool;
-	private String level;
+	private String descriptor;
+	private Map<String, Integer> level;
 	private String components;
 	private String castingTime;
 	private String target;
@@ -23,6 +25,32 @@ public class Spell implements DatabaseObject, Serializable {
 	private String description;
 	private String materialComponent;
 	private String focus;
+	private String xpCost;
+	
+	public Spell(String name, String school, String subschool, String descriptor, 
+			Map<String, Integer> level, String components, String castingTime,
+			String target, String range, String effect, String duration, String savingThrow,
+			String spellResistance, String description, String materialComponent,
+			String focus, String xpCost) {
+		
+		this.name = name;
+		this.school = school;
+		this.subschool = subschool;
+		this.descriptor = descriptor;
+		this.level = level;
+		this.components = components;
+		this.castingTime = castingTime;
+		this.target = target;
+		this.range = range;
+		this.effect = effect;
+		this.duration = duration;
+		this.savingThrow = savingThrow;
+		this.spellResistance = spellResistance;
+		this.description = description;
+		this.materialComponent = materialComponent;
+		this.focus = focus;
+		this.xpCost = xpCost;
+	}
 	
 	@Override
 	public long getId() {
@@ -52,108 +80,132 @@ public class Spell implements DatabaseObject, Serializable {
 		this.school = school;
 	}
 
-	private String getSubschool() {
+	public String getSubschool() {
 		return subschool;
 	}
 
-	private void setSubschool(String subschool) {
+	public void setSubschool(String subschool) {
 		this.subschool = subschool;
 	}
 
-	private String getLevel() {
+	public String getDescriptor() {
+		return descriptor;
+	}
+
+	public void setDescriptor(String descriptor) {
+		this.descriptor = descriptor;
+	}
+
+	public Map<String, Integer> getLevel() {
 		return level;
 	}
 
-	private void setLevel(String level) {
+	public void setLevel(Map<String, Integer> level) {
 		this.level = level;
 	}
+	
+	public void addLevel(String className, Integer level) {
+		this.level.put(className, level);
+	}
 
-	private String getComponents() {
+	public String getComponents() {
 		return components;
 	}
 
-	private void setComponents(String components) {
+	public void setComponents(String components) {
 		this.components = components;
 	}
 
-	private String getCastingTime() {
+	public String getCastingTime() {
 		return castingTime;
 	}
 
-	private void setCastingTime(String castingTime) {
+	public void setCastingTime(String castingTime) {
 		this.castingTime = castingTime;
 	}
 
-	private String getTarget() {
+	public String getTarget() {
 		return target;
 	}
 
-	private void setTarget(String target) {
+	public void setTarget(String target) {
 		this.target = target;
 	}
 
-	private String getRange() {
+	public String getRange() {
 		return range;
 	}
 
-	private void setRange(String range) {
+	public void setRange(String range) {
 		this.range = range;
 	}
 
-	private String getEffect() {
-		return effect;
-	}
-
-	private void setEffect(String effect) {
-		this.effect = effect;
-	}
-
-	private String getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	private void setDuration(String duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
-	private String getSavingThrow() {
+	public String getEffect() {
+		return effect;
+	}
+
+	public void setEffect(String effect) {
+		this.effect = effect;
+	}
+
+	public String getSavingThrow() {
 		return savingThrow;
 	}
 
-	private void setSavingThrow(String savingThrow) {
+	public void setSavingThrow(String savingThrow) {
 		this.savingThrow = savingThrow;
 	}
 
-	private String getSpellResistance() {
+	public String getSpellResistance() {
 		return spellResistance;
 	}
 
-	private void setSpellResistance(String spellResistance) {
+	public void setSpellResistance(String spellResistance) {
 		this.spellResistance = spellResistance;
 	}
 
-	private String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	private void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	private String getMaterialComponent() {
+	public String getMaterialComponent() {
 		return materialComponent;
 	}
 
-	private void setMaterialComponent(String materialComponent) {
+	public void setMaterialComponent(String materialComponent) {
 		this.materialComponent = materialComponent;
 	}
 
-	private String getFocus() {
+	public String getFocus() {
 		return focus;
 	}
 
-	private void setFocus(String focus) {
+	public void setFocus(String focus) {
 		this.focus = focus;
 	}
 
+	public String getXpCost() {
+		return xpCost;
+	}
+
+	public void setXpCost(String xpCost) {
+		this.xpCost = xpCost;
+	}
+
+	public String toString() {
+		return this.name;
+	}
+	
 }

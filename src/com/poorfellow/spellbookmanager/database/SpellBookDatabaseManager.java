@@ -19,7 +19,6 @@ public interface SpellBookDatabaseManager {
 	public static final String SPELL_TABLE_ROW_SCHOOL = "school";
 	public static final String SPELL_TABLE_ROW_SUBSCHOOL = "subschool";
 	public static final String SPELL_TABLE_ROW_DESCRIPTOR = "descriptor";
-	public static final String SPELL_TABLE_ROW_LEVEL = "level";
 	public static final String SPELL_TABLE_ROW_COMPONENTS = "components";
 	public static final String SPELL_TABLE_ROW_CASTING_TIME = "casting_time";
 	public static final String SPELL_TABLE_ROW_TARGET = "target";

@@ -95,4 +95,9 @@ public class SpellListActivity extends FragmentActivity implements
 			startActivity(detailIntent);
 		}
 	}
+
+	@Override
+	public void onItemSelected(long id) {
+		onItemSelected(String.valueOf(id));		
+	}
 }
