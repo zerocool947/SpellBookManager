@@ -1,13 +1,15 @@
 package com.poorfellow.spellbookmanager;
 
+import java.util.Map;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.poorfellow.spellbookmanager.dummy.DummyContent;
 import com.poorfellow.spellbookmanager.spell.Spell;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
 
@@ -26,7 +28,6 @@ public class SpellDetailFragment extends Fragment {
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
-	private DummyContent.DummyItem mItem;
 	private Spell mSpell;
 
 	/**
@@ -44,8 +45,7 @@ public class SpellDetailFragment extends Fragment {
 			// Load the dummy content specified by the fragment
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
-			mItem = DummyContent.ITEM_MAP.get(getArguments().getString(
-					ARG_ITEM_ID));
+
 			SpellDAO spellDAO = new SpellDAO(this.getActivity());
 			mSpell = spellDAO.getSpellById(getArguments().getString(ARG_ITEM_ID));
 		}
@@ -63,8 +63,54 @@ public class SpellDetailFragment extends Fragment {
 					.setText(mItem.content);
 		}*/
 		if (mSpell != null) {
-			((TextView) rootView.findViewById(R.id.spell_detail))
-			.setText(mSpell.getName());
+			TextView spellDetail = ((TextView) rootView.findViewById(R.id.spell_detail));
+			spellDetail.setText(mSpell.getName() + "\n");
+			spellDetail.append(Html.fromHtml("<i>" + mSpell.getSchool() + " </i>"));
+			
+			if (!mSpell.getSubschool().equals("NULL")){
+				spellDetail.append(Html.fromHtml("<i>" + mSpell.getSubschool() + " </i>"));
+			}
+			if (!mSpell.getDescriptor().equals("NULL")) {
+				spellDetail.append(Html.fromHtml("<i>" + mSpell.getDescriptor() + " </i>"));
+			}
+			
+			spellDetail.append(Html.fromHtml("<br /><b>Level: </b>"));
+			Map<String, Integer> levelMap = mSpell.getLevel();
+			String[] levelMapKeyStrings = (String[]) levelMap.keySet().toArray(new String[0]);
+			for (int i = 0; i < levelMapKeyStrings.length; i++) {
+				spellDetail.append(levelMapKeyStrings[i] + " " + levelMap.get(levelMapKeyStrings[i]));
+				if (i < (levelMapKeyStrings.length - 1)) {
+					spellDetail.append(", ");
+				}
+			}
+			
+			if (!mSpell.getComponents().isEmpty()) {
+				spellDetail.append(Html.fromHtml("<br /><b>Components: </b>" + mSpell.getComponents()));
+			}
+			if (!mSpell.getCastingTime().equals("NULL")) {
+				spellDetail.append(Html.fromHtml("<br /><b>Casting Time: </b>" + mSpell.getCastingTime()));
+			}
+			if (mSpell.getTarget() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Target: </b>" + mSpell.getTarget()));
+			}
+			if (mSpell.getRange() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Range: </b>" + mSpell.getRange()));
+			}
+			if (mSpell.getEffect() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Effect: </b>" + mSpell.getEffect()));
+			}
+			if (mSpell.getDuration() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Duration: </b>" + mSpell.getDuration()));
+			}
+			if (mSpell.getSavingThrow() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Saving Throw: </b>" + mSpell.getSavingThrow()));
+			}
+			if (mSpell.getSpellResistance() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Spell Resistance: </b>" + mSpell.getSpellResistance()));
+			}
+			if (mSpell.getDescription() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Description: </b>" + mSpell.getDescription()));
+			}
 		}
 
 		return rootView;
