@@ -82,16 +82,12 @@ public class SpellDAO implements SpellBookDatabaseManager {
 	public List<DatabaseObject> getAllRows() {
 		db = DBHelper.getWritableDatabase();
 		List<DatabaseObject> spells = new ArrayList<DatabaseObject>();
-		Cursor spellCursor;
+		Cursor spellCursor = null;
+		Cursor levelCursor = null;
 		
 		try {
 			spellCursor = db.query(SPELL_TABLE_NAME, 
-					new String[] {SPELL_TABLE_ROW_ID, SPELL_TABLE_ROW_NAME, SPELL_TABLE_ROW_SCHOOL,
-					SPELL_TABLE_ROW_SUBSCHOOL, SPELL_TABLE_ROW_DESCRIPTOR, SPELL_TABLE_ROW_COMPONENTS,
-					SPELL_TABLE_ROW_CASTING_TIME, SPELL_TABLE_ROW_TARGET, SPELL_TABLE_ROW_RANGE,
-					SPELL_TABLE_ROW_EFFECT, SPELL_TABLE_ROW_DURATION, SPELL_TABLE_ROW_SAVING_THROW,
-					SPELL_TABLE_ROW_SPELL_RESISTANCE, SPELL_TABLE_ROW_DESCRIPTION, SPELL_TABLE_ROW_MATERIAL_COMPONENT,
-					SPELL_TABLE_ROW_FOCUS, SPELL_TABLE_ROW_XP_COST},
+					null,
 					null, null, null, null, null);
 			spellCursor.moveToFirst();
 
@@ -117,7 +113,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					String xpCost = spellCursor.getString(17);
 					Map<String, Integer> level = new HashMap<String, Integer>();
 					
-					Cursor levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,
+					levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,
 							null, SPELL_CLASS_LEVEL_ROW_SPELL_ID + " = ?", 
 							new String[] {Long.toString(spellId)}, null, null, null);
 					
@@ -133,6 +129,8 @@ public class SpellDAO implements SpellBookDatabaseManager {
 							level.put(className, Integer.valueOf(levelValue));
 						}
 						while (levelCursor.moveToNext());
+						
+						levelCursor.close();
 					}
 					
 					Spell spell = new Spell(name, school, subschool, descriptor, 
@@ -148,7 +146,12 @@ public class SpellDAO implements SpellBookDatabaseManager {
 		} catch (SQLException e) {
 			Log.e("DB Error", e.toString());
 			e.printStackTrace();
+		} finally {
+			spellCursor.close();
+			levelCursor.close();
+			db.close();
 		}
+		
 		return spells;
 	}
 
@@ -161,7 +164,8 @@ public class SpellDAO implements SpellBookDatabaseManager {
 	public Spell getSpellById(long spellId) {
 		db = DBHelper.getWritableDatabase();
 		Spell spell = null;
-		Cursor spellCursor;
+		Cursor spellCursor = null;
+		Cursor levelCursor = null;
 		
 		try {
 			spellCursor = db.query(SPELL_TABLE_NAME, 
@@ -190,7 +194,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					String xpCost = spellCursor.getString(17);
 					Map<String, Integer> level = new HashMap<String, Integer>();
 					
-					Cursor levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,
+					levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,
 							null, SPELL_CLASS_LEVEL_ROW_SPELL_ID + " = ?", 
 							new String[] {Long.toString(spellId)}, null, null, null);
 					
@@ -220,6 +224,10 @@ public class SpellDAO implements SpellBookDatabaseManager {
 		} catch (SQLException e) {
 			Log.e("DB Error", e.toString());
 			e.printStackTrace();
+		}  finally {
+			spellCursor.close();
+			levelCursor.close();
+			db.close();
 		}
 		
 		return spell;

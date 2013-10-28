@@ -67,10 +67,10 @@ public class SpellDetailFragment extends Fragment {
 			spellDetail.setText(mSpell.getName() + "\n");
 			spellDetail.append(Html.fromHtml("<i>" + mSpell.getSchool() + " </i>"));
 			
-			if (!mSpell.getSubschool().equals("NULL")){
+			if (mSpell.getSubschool() != null){
 				spellDetail.append(Html.fromHtml("<i>" + mSpell.getSubschool() + " </i>"));
 			}
-			if (!mSpell.getDescriptor().equals("NULL")) {
+			if (mSpell.getDescriptor() != null) {
 				spellDetail.append(Html.fromHtml("<i>" + mSpell.getDescriptor() + " </i>"));
 			}
 			
@@ -84,10 +84,10 @@ public class SpellDetailFragment extends Fragment {
 				}
 			}
 			
-			if (!mSpell.getComponents().isEmpty()) {
+			if (mSpell.getComponents() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Components: </b>" + mSpell.getComponents()));
 			}
-			if (!mSpell.getCastingTime().equals("NULL")) {
+			if (mSpell.getCastingTime() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Casting Time: </b>" + mSpell.getCastingTime()));
 			}
 			if (mSpell.getTarget() != null) {

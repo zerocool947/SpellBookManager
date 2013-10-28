@@ -157,10 +157,11 @@ public class CharacterDAO implements SpellBookDatabaseManager {
 			values.put(CHARACTER_TABLE_ROW_NAME, character.getName());
 			values.put(CHARACTER_TABLE_ROW_DATA, characterXML);
 			characterId = db.insert(CHARACTER_TABLE_NAME, null, values);
-			db.close();
 		} catch(Exception e) {
 			Log.e("DB ERROR", e.toString());
 			e.printStackTrace();
+		} finally {
+			db.close();
 		}
 		
 		return characterId;
@@ -188,7 +189,7 @@ public class CharacterDAO implements SpellBookDatabaseManager {
 	public List<DatabaseObject> getAllRows() {
 		db = DBHelper.getWritableDatabase();
 		List<DatabaseObject> characters = new ArrayList<DatabaseObject>();
-		Cursor cursor;
+		Cursor cursor = null;
 		
 		try {
 			cursor = db.query(CHARACTER_TABLE_NAME,
@@ -208,6 +209,9 @@ public class CharacterDAO implements SpellBookDatabaseManager {
 		} catch (SQLException e) {
 			Log.e("DB Error", e.toString());
 			e.printStackTrace();
+		} finally {
+			cursor.close();
+			db.close();
 		}
 		
 		return characters;
