@@ -31,6 +31,7 @@ public interface SpellBookDatabaseManager {
 	public static final String SPELL_TABLE_ROW_MATERIAL_COMPONENT = "material_component";
 	public static final String SPELL_TABLE_ROW_ARCANE_MATERIAL_COMPONENT = "arcane_material_component";
 	public static final String SPELL_TABLE_ROW_FOCUS = "focus";
+	public static final String SPELL_TABLE_ROW_ARCANE_FOCUS = "arcane_focus";
 	public static final String SPELL_TABLE_ROW_XP_COST = "xp_cost";
 
 	public final static String SPELL_BLOCK_TABLE_NAME = "spell_blocks";

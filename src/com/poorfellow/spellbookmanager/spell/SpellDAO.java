@@ -29,12 +29,12 @@ public class SpellDAO implements SpellBookDatabaseManager {
 			Map<String, Integer> level, String components, String castingTime,
 			String target, String range, String effect, String duration, String savingThrow,
 			String spellResistance, String description, String materialComponent,
-			String arcMaterialComponent, String focus, String xpCost) {
+			String arcMaterialComponent, String focus, String arcFocus, String xpCost) {
 		
 		
 		Spell newSpell = new Spell(name, school, subschool, descriptor, level, components, castingTime, 
 				target, range, effect, duration, savingThrow, spellResistance, description, 
-				materialComponent, arcMaterialComponent, focus, xpCost);
+				materialComponent, arcMaterialComponent, focus, arcFocus, xpCost);
 		long rowId = addRow(newSpell);
 		newSpell.setId(rowId);
 		return newSpell;
@@ -110,7 +110,8 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					String materialComponent = spellCursor.getString(14);
 					String arcMaterialComponent = spellCursor.getString(15);
 					String focus = spellCursor.getString(16);
-					String xpCost = spellCursor.getString(17);
+					String arcFocus = spellCursor.getString(17);
+					String xpCost = spellCursor.getString(18);
 					Map<String, Integer> level = new HashMap<String, Integer>();
 					
 					levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,
@@ -136,7 +137,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					Spell spell = new Spell(name, school, subschool, descriptor, 
 							level, components, castingTime, target, range, effect, 
 							duration, savingThrow, spellResistance, description, 
-							materialComponent, arcMaterialComponent, focus, xpCost);
+							materialComponent, arcMaterialComponent, focus, arcFocus, xpCost);
 					
 					spell.setId(spellId);
 					spells.add(spell);
@@ -149,6 +150,36 @@ public class SpellDAO implements SpellBookDatabaseManager {
 		} finally {
 			spellCursor.close();
 			levelCursor.close();
+			db.close();
+		}
+		
+		return spells;
+	}
+	
+	public Map<String, Integer> getAllRowsAsMap() {
+		db = DBHelper.getWritableDatabase();
+		Map<String, Integer> spells = new HashMap<String, Integer>();
+		Cursor spellCursor = null;
+		
+		try {
+			spellCursor = db.query(SPELL_TABLE_NAME, new String[] {SPELL_TABLE_ROW_ID, SPELL_TABLE_ROW_NAME}, 
+					null, null, null, null, null);
+			
+			spellCursor.moveToFirst();
+			
+			if (!spellCursor.isAfterLast()) {
+				do {
+					int id = spellCursor.getInt(0);
+					String name = spellCursor.getString(1);
+					
+					spells.put(name, Integer.valueOf(id));
+				} while(spellCursor.moveToNext());
+			}
+		} catch (SQLException e) {
+			Log.e("DB Error", e.toString());
+			e.printStackTrace();
+		}  finally {
+			spellCursor.close();
 			db.close();
 		}
 		
@@ -191,7 +222,8 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					String materialComponent = spellCursor.getString(14);
 					String arcMaterialComponent = spellCursor.getString(15);
 					String focus = spellCursor.getString(16);
-					String xpCost = spellCursor.getString(17);
+					String arcFocus = spellCursor.getString(17);
+					String xpCost = spellCursor.getString(18);
 					Map<String, Integer> level = new HashMap<String, Integer>();
 					
 					levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,
@@ -215,7 +247,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					spell = new Spell(name, school, subschool, descriptor, 
 							level, components, castingTime, target, range, effect, 
 							duration, savingThrow, spellResistance, description, 
-							materialComponent, arcMaterialComponent, focus, xpCost);
+							materialComponent, arcMaterialComponent, focus, arcFocus, xpCost);
 					
 					spell.setId(spellId);
 				}

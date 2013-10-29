@@ -73,6 +73,7 @@ public class SpellDetailFragment extends Fragment {
 			if (mSpell.getDescriptor() != null) {
 				spellDetail.append(Html.fromHtml("<i>" + mSpell.getDescriptor() + " </i>"));
 			}
+			spellDetail.append("\n");
 			
 			spellDetail.append(Html.fromHtml("<br /><b>Level: </b>"));
 			Map<String, Integer> levelMap = mSpell.getLevel();
@@ -108,8 +109,27 @@ public class SpellDetailFragment extends Fragment {
 			if (mSpell.getSpellResistance() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Spell Resistance: </b>" + mSpell.getSpellResistance()));
 			}
+			
+			spellDetail.append("\n");
+			
 			if (mSpell.getDescription() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Description: </b>" + mSpell.getDescription()));
+				spellDetail.append("\n");
+			}
+			if (mSpell.getMaterialComponent() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>>Material Component: </b>" + mSpell.getMaterialComponent()));
+			}
+			if (mSpell.getArcMaterialComponent() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Arcane Material Component: </b>" + mSpell.getArcMaterialComponent()));
+			}
+			if (mSpell.getFocus() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Focus: </b>" + mSpell.getFocus()));
+			}
+			if (mSpell.getArcFocus() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>Arcane Focus: </b>" + mSpell.getArcFocus()));
+			}
+			if (mSpell.getXpCost() != null) {
+				spellDetail.append(Html.fromHtml("<br /><b>XP Cost</b>" + mSpell.getXpCost()));
 			}
 		}
 

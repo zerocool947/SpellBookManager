@@ -26,13 +26,14 @@ public class Spell implements DatabaseObject, Serializable {
 	private String materialComponent;
 	private String arcMaterialComponent;
 	private String focus;
+	private String arcFocus;
 	private String xpCost;
 	
 	public Spell(String name, String school, String subschool, String descriptor, 
 			Map<String, Integer> level, String components, String castingTime,
 			String target, String range, String effect, String duration, String savingThrow,
 			String spellResistance, String description, String materialComponent,
-			String arcMaterialComponent, String focus, String xpCost) {
+			String arcMaterialComponent, String focus, String arcFocus, String xpCost) {
 		
 		this.name = name;
 		this.school = school;
@@ -49,8 +50,9 @@ public class Spell implements DatabaseObject, Serializable {
 		this.spellResistance = spellResistance;
 		this.description = description;
 		this.materialComponent = materialComponent;
-		this.setArcMaterialComponent(arcMaterialComponent);
+		this.arcMaterialComponent = arcMaterialComponent;
 		this.focus = focus;
+		this.setArcFocus(arcFocus);
 		this.xpCost = xpCost;
 	}
 	
@@ -216,6 +218,14 @@ public class Spell implements DatabaseObject, Serializable {
 
 	public String toString() {
 		return this.name;
+	}
+
+	public String getArcFocus() {
+		return arcFocus;
+	}
+
+	public void setArcFocus(String arcFocus) {
+		this.arcFocus = arcFocus;
 	}
 	
 }

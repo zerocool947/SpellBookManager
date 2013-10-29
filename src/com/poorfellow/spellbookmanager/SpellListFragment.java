@@ -1,6 +1,9 @@
 package com.poorfellow.spellbookmanager;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,7 +12,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.poorfellow.spellbookmanager.spell.Spell;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
 
 /**
@@ -40,7 +42,8 @@ public class SpellListFragment extends ListFragment {
 	 */
 	private int mActivatedPosition = ListView.INVALID_POSITION;
 	
-	private List<Spell> arrayAdapterSpells;
+	private List<String> arrayAdapterSpells;
+	private Map<String, Integer> arrayAdapterMap;
 
 	/**
 	 * A callback interface that all activities containing this fragment must
@@ -86,8 +89,10 @@ public class SpellListFragment extends ListFragment {
 				android.R.id.text1, DummyContent.ITEMS));*/
 		
 		SpellDAO spellDAO = new SpellDAO(this.getActivity());
-		arrayAdapterSpells = (List<Spell>) (List<?>) spellDAO.getAllRows();
-		final ArrayAdapter<Spell> spellsAdapter = new ArrayAdapter<Spell>(getActivity(),
+		arrayAdapterMap = spellDAO.getAllRowsAsMap();
+		arrayAdapterSpells =  (List<String>) (List<?>) Arrays.asList(arrayAdapterMap.keySet().toArray());
+		Collections.sort(arrayAdapterSpells);
+		final ArrayAdapter<String> spellsAdapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, android.R.id.text1, arrayAdapterSpells);
 		setListAdapter(spellsAdapter);
 	}
@@ -132,8 +137,7 @@ public class SpellListFragment extends ListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		//mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
-		mCallbacks.onItemSelected(arrayAdapterSpells.get(position).getId());
+		mCallbacks.onItemSelected(Integer.toString(arrayAdapterMap.get(arrayAdapterSpells.get(position))));
 	}
 
 	@Override
