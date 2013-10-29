@@ -114,10 +114,9 @@ public class SpellDetailFragment extends Fragment {
 			
 			if (mSpell.getDescription() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Description: </b>" + mSpell.getDescription()));
-				spellDetail.append("\n");
 			}
 			if (mSpell.getMaterialComponent() != null) {
-				spellDetail.append(Html.fromHtml("<br /><b>>Material Component: </b>" + mSpell.getMaterialComponent()));
+				spellDetail.append(Html.fromHtml("<br /><b>Material Component: </b>" + mSpell.getMaterialComponent()));
 			}
 			if (mSpell.getArcMaterialComponent() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Arcane Material Component: </b>" + mSpell.getArcMaterialComponent()));
