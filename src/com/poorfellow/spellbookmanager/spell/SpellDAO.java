@@ -206,24 +206,24 @@ public class SpellDAO implements SpellBookDatabaseManager {
 
 			if (!spellCursor.isAfterLast()) {
 				do {//maybe set with getColumnIndex later
-					String name = spellCursor.getString(1);
-					String school = spellCursor.getString(2);
-					String subschool = spellCursor.getString(3);
-					String descriptor = spellCursor.getString(4);
-					String components = spellCursor.getString(5);
-					String castingTime = spellCursor.getString(6);
-					String target = spellCursor.getString(7);
-					String range = spellCursor.getString(8);
-					String effect = spellCursor.getString(9);
-					String duration = spellCursor.getString(10);
-					String savingThrow = spellCursor.getString(11);
-					String spellResistance = spellCursor.getString(12);
-					String description = spellCursor.getString(13);
-					String materialComponent = spellCursor.getString(14);
-					String arcMaterialComponent = spellCursor.getString(15);
-					String focus = spellCursor.getString(16);
-					String arcFocus = spellCursor.getString(17);
-					String xpCost = spellCursor.getString(18);
+					String name = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_NAME));
+					String school = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SCHOOL));
+					String subschool = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SUBSCHOOL));
+					String descriptor = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_DESCRIPTOR));
+					String components = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_COMPONENTS));
+					String castingTime = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_CASTING_TIME));
+					String target = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_TARGET));
+					String range = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_RANGE));
+					String effect = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_EFFECT));
+					String duration = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_DURATION));
+					String savingThrow = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SAVING_THROW));
+					String spellResistance = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SPELL_RESISTANCE));
+					String description = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_DESCRIPTION));
+					String materialComponent = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_MATERIAL_COMPONENT));
+					String arcMaterialComponent = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_ARCANE_MATERIAL_COMPONENT));
+					String focus = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_FOCUS));
+					String arcFocus = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_ARCANE_FOCUS));
+					String xpCost = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_XP_COST));
 					Map<String, Integer> level = new HashMap<String, Integer>();
 					
 					levelCursor = db.query(SPELL_CLASS_LEVEL_TABLE_NAME,

@@ -198,9 +198,9 @@ public class CharacterDAO implements SpellBookDatabaseManager {
 			cursor.moveToFirst();
 			if (!cursor.isAfterLast()) {
 				do {
-					long ID = cursor.getLong(0);
-					String name = cursor.getString(1);
-					byte[] data = cursor.getBlob(2);
+					long ID = cursor.getLong(cursor.getColumnIndex(CHARACTER_TABLE_ROW_ID));
+					String name = cursor.getString(cursor.getColumnIndex(CHARACTER_TABLE_ROW_NAME));
+					byte[] data = cursor.getBlob(cursor.getColumnIndex(CHARACTER_TABLE_ROW_DATA));
 					Character character = new Character(ID, name, data);
 					characters.add(character);
 				}
