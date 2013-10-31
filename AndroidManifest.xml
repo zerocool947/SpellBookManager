@@ -36,14 +36,6 @@
             android:label="@string/title_activity_add_character" >
         </activity>
         <activity
-            android:name="com.poorfellow.spellbookmanager.ViewCharacterActivity"
-            android:label="@string/title_activity_view_character"
-            android:parentActivityName="com.poorfellow.spellbookmanager.CharacterListActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.poorfellow.spellbookmanager.CharacterListActivity" />
-        </activity>
-        <activity
             android:name="com.poorfellow.spellbookmanager.SpellListActivity"
             android:label="@string/title_spell_list"
             android:parentActivityName="com.poorfellow.spellbookmanager.ManagerHome" >

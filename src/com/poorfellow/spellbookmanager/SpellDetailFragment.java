@@ -109,8 +109,8 @@ public class SpellDetailFragment extends Fragment {
 			if (mSpell.getSpellResistance() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Spell Resistance: </b>" + mSpell.getSpellResistance()));
 			}
-			//not sure how I feel about this extra newline
-			//spellDetail.append("\n");
+			
+			spellDetail.append("\n");
 			
 			if (mSpell.getDescription() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Description: </b>" + mSpell.getDescription()));
