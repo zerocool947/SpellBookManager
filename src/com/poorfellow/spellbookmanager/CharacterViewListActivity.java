@@ -110,7 +110,7 @@ public class CharacterViewListActivity extends FragmentActivity {
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return "iM SPESHUL";
 			case 1:
 				return getString(R.string.title_section2).toUpperCase(l);
 			case 2:
@@ -142,8 +142,9 @@ public class CharacterViewListActivity extends FragmentActivity {
 					false);
 			TextView dummyTextView = (TextView) rootView
 					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+			//dummyTextView.setText(Integer.toString(getArguments().getInt(
+				//	ARG_SECTION_NUMBER)));
+			dummyTextView.setText("LOLOLOLOLOLO");
 			return rootView;
 		}
 	}

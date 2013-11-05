@@ -89,13 +89,13 @@ public class CharacterListActivity extends Activity {
         List<? extends DatabaseObject> characterObjects = charDAO.getAllRows();
 		List<Character> characters = (List<Character>) (List<?>)characterObjects;
         
-        /*for (final Character character : characters) {
+        for (final Character character : characters) {
         	Button characterButton = new Button(this);
         	characterButton.setText(character.getName());
         	characterButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent i = new Intent(CharacterListActivity.this, ViewCharacterActivity.class);
+					Intent i = new Intent(CharacterListActivity.this, CharacterViewListActivity.class);
 					i.putExtra("character", character);
 					startActivity(i);
 				}
@@ -112,7 +112,7 @@ public class CharacterListActivity extends Activity {
         		startActivity(i);
         	}
         });
-        mCharacterButtonContainer.addView(addCharButton);*/
+        mCharacterButtonContainer.addView(addCharButton);
 	}
 
 }

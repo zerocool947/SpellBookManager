@@ -38,16 +38,23 @@ public interface SpellBookDatabaseManager {
 	public final static String SPELL_BLOCK_ROW_ID = "id";
 	public final static String SPELL_BLOCK_ROW_BLOCK_NAME = "name";
 	public final static String SPELL_BLOCK_ROW_CHARACTER_ID = "character_id";
-	//make another table that's the list of spell IDs
-	//public final static String SPELL_BLOCK_ROW_DATA = "spell_block_data";
+	
+	public final static String SPELL_BLOCK_SHEET_TABLE_NAME = "spell_block_sheets";
+	public final static String SPELL_BLOCK_SHEET_ROW_ID = "id";
+	public final static String SPELL_BLOCK_SHEET_ROW_SPELL_BLOCK_ID = "spell_block_id";
+	public final static String SPELL_BLOCK_SHEET_ROW_SPELL_ID = "spell_id";
 	
 	public final static String DAILY_LIST_TABLE_NAME = "daily_lists";
 	public final static String DAILY_LIST_ROW_ID = "id";
 	public final static String DAILY_LIST_ROW_NAME = "name";
 	public final static String DAILY_LIST_ROW_CHARACTER_ID = "character_id";
 	public final static String DAILY_LIST_ROW_TYPE = "type";
-	//make another table that's the list of spell IDs
-	//public final static String DAILY_LIST_ROW_DATA = "blob";
+
+	public final static String DAILY_LIST_SHEET_TABLE_NAME = "daily_list_sheets";
+	public final static String DAILY_LIST_SHEET_ROW_ID = "id";
+	public final static String DAILY_LIST_SHEET_ROW_DAILY_LIST_ID = "daily_list_id";
+	public final static String DAILY_LIST_SHEET_ROW_SPELL_BLOCK_ID = "spell_block_id";
+	public final static String DAILY_LIST_SHEET_ROW_SPELL_ID = "spell_id";
 	
 	public final static String SPELL_CLASS_LEVEL_TABLE_NAME= "spell_class_level";
 	public static final String SPELL_CLASS_LEVEL_ROW_ID = "id";
