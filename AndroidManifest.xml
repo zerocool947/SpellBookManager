@@ -51,6 +51,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SpellListActivity" />
         </activity>
+        <activity
+            android:name="com.poorfellow.spellbookmanager.CharacterViewListActivity"
+            android:label="@string/title_activity_character_view_list"
+            android:parentActivityName="com.poorfellow.spellbookmanager.CharacterListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.poorfellow.spellbookmanager.CharacterListActivity" />
+        </activity>
     </application>
 
 </manifest>

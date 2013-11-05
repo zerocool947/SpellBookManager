@@ -16,5 +16,9 @@
     <string name="title_activity_view_character">ViewCharacterActivity</string>
     <string name="title_spell_list">Spells</string>
     <string name="title_spell_detail">Spell Detail</string>
+    <string name="title_activity_character_view_list">CharacterViewListActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
 </resources>

@@ -5,6 +5,7 @@ import java.util.Map;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,16 +55,11 @@ public class SpellDetailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_spell_detail,
+		View rootView =  inflater.inflate(R.layout.fragment_spell_detail,
 				container, false);
 
-		// Show the dummy content as text in a TextView.
-		/*if (mItem != null) {
-			((TextView) rootView.findViewById(R.id.spell_detail))
-					.setText(mItem.content);
-		}*/
 		if (mSpell != null) {
-			TextView spellDetail = ((TextView) rootView.findViewById(R.id.spell_detail));
+			TextView spellDetail =  (TextView) rootView.findViewById(R.id.spell_detail);
 			spellDetail.setText(mSpell.getName() + "\n");
 			spellDetail.append(Html.fromHtml("<i>" + mSpell.getSchool() + " </i>"));
 			
