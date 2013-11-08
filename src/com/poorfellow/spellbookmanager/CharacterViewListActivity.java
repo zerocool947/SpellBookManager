@@ -1,6 +1,7 @@
 package com.poorfellow.spellbookmanager;
 
 import java.util.Locale;
+import java.util.Vector;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,7 @@ public class CharacterViewListActivity extends FragmentActivity {
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
+	CharacterViewListPagerAdapter mListPagerAdapter;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -46,6 +48,10 @@ public class CharacterViewListActivity extends FragmentActivity {
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
+		Vector<View> pages = null;
+		Vector<View> buttons = null;
+		
+		mListPagerAdapter = new CharacterViewListPagerAdapter(this, pages, buttons);
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
