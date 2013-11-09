@@ -77,7 +77,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 		SpellBookDatabaseManager.SPELL_BLOCK_TABLE_NAME +
 		" (" + 
 		SpellBookDatabaseManager.SPELL_BLOCK_ROW_ID + " integer primary key autoincrement not null," +
-		SpellBookDatabaseManager.SPELL_BLOCK_ROW_BLOCK_NAME + " text," +
+		SpellBookDatabaseManager.SPELL_BLOCK_ROW_NAME + " text," +
 		SpellBookDatabaseManager.SPELL_BLOCK_ROW_CHARACTER_ID + " integer" +
 		");";
 		

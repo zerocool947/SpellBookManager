@@ -52,7 +52,7 @@ public class Spell implements DatabaseObject, Serializable {
 		this.materialComponent = materialComponent;
 		this.arcMaterialComponent = arcMaterialComponent;
 		this.focus = focus;
-		this.setArcFocus(arcFocus);
+		this.arcFocus = arcFocus;
 		this.xpCost = xpCost;
 	}
 	

@@ -36,7 +36,7 @@ public interface SpellBookDatabaseManager {
 
 	public final static String SPELL_BLOCK_TABLE_NAME = "spell_blocks";
 	public final static String SPELL_BLOCK_ROW_ID = "id";
-	public final static String SPELL_BLOCK_ROW_BLOCK_NAME = "name";
+	public final static String SPELL_BLOCK_ROW_NAME = "name";
 	public final static String SPELL_BLOCK_ROW_CHARACTER_ID = "character_id";
 	
 	public final static String SPELL_BLOCK_SHEET_TABLE_NAME = "spell_block_sheets";
