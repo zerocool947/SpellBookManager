@@ -82,6 +82,24 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 		");";
 		
 		db.execSQL(spellBlockTableQueryString);
+		
+		String spellBlockSheetTableQueryString = "create table " +
+		SpellBookDatabaseManager.SPELL_BLOCK_SHEET_TABLE_NAME +
+		" (" +
+		SpellBookDatabaseManager.SPELL_BLOCK_SHEET_ROW_ID + " integer primary key autoincrement not null," +
+		SpellBookDatabaseManager.SPELL_BLOCK_SHEET_ROW_SPELL_BLOCK_ID + " integer," +
+		SpellBookDatabaseManager.SPELL_BLOCK_SHEET_ROW_SPELL_ID + " integer," +
+		"FOREIGN KEY(" +
+		SpellBookDatabaseManager.SPELL_BLOCK_SHEET_ROW_SPELL_BLOCK_ID + ") REFERENCES " +
+		SpellBookDatabaseManager.SPELL_BLOCK_TABLE_NAME + "(" +
+		SpellBookDatabaseManager.SPELL_BLOCK_ROW_ID + ")," +
+		"FOREIGN KEY(" + 
+		SpellBookDatabaseManager.SPELL_BLOCK_SHEET_ROW_SPELL_ID + ") REFERENCES " +
+		SpellBookDatabaseManager.SPELL_TABLE_NAME + "(" +
+		SpellBookDatabaseManager.SPELL_TABLE_ROW_ID + ")" +		
+		");";
+		
+		db.execSQL(spellBlockSheetTableQueryString);
 		/*db.execSQL("insert into " +
 		SpellBookDatabaseManager.SPELL_CLASS_LEVEL_TABLE_NAME +
 		"(" + 
@@ -91,6 +109,21 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 		")"+
 		"VALUES(" + 
 		"${id},${className},${level});");*/
+		
+		
+		
+		String yousseffQueryString = "insert into " +
+				SpellBookDatabaseManager.CHARACTER_TABLE_NAME +
+				"(" +
+				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_NAME + "," +
+				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_DATA +
+				")" + 
+				"VALUES(" +
+				"'Yousseff'," +
+				"'<character><name>Youssef</name><level>7</level><caster-level>7</caster-level><class>cleric</class><turn-attempts>7</turn-attempts><race>human</race><stats><int>9</int><str>14</str><dex>10</dex><con>14</con><wis>20</wis><cha>12</cha></stats></character>'" +
+				");";
+		db.execSQL(yousseffQueryString);
+				
 		
 		String AcidArrowQueryString = "insert into " +
                 SpellBookDatabaseManager.SPELL_TABLE_NAME + 

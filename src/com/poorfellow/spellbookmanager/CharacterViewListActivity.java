@@ -1,11 +1,13 @@
 package com.poorfellow.spellbookmanager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import com.poorfellow.spellbookmanager.spell.SpellBlockDAO;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class CharacterViewListActivity extends FragmentActivity {
@@ -46,6 +50,10 @@ public class CharacterViewListActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_character_view_list);
 
+		Intent intent = getIntent();
+		String characterData = intent.getStringExtra("characterData");
+		//Log.d("CHARACTER_DATA", characterData);
+		
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -182,7 +190,6 @@ public class CharacterViewListActivity extends FragmentActivity {
 		
 		private List<String> arrayAdapterSpellBlocks;
 		private Map<String, Integer> arrayAdapterSpellBlocksMap;
-
 		
 		public SpellBlockListFragment () {
 			
@@ -193,15 +200,56 @@ public class CharacterViewListActivity extends FragmentActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_character_view_list_spell_block, container,
 					false);
-			ListView spellBlockListView = new ListView(this.getActivity());
+			Button createButton = (Button) rootView.findViewById(R.id.createSpellBlockButton);
+			View divideContainer = rootView.findViewById(R.id.spellBlockDivideContainer);
+			arrayAdapterSpellBlocks = new ArrayList<String>();
+			arrayAdapterSpellBlocks.add("Utility Block");
+			arrayAdapterSpellBlocks.add("Offensive Block");
 			
-			SpellBlockDAO spellBlockDAO = new SpellBlockDAO(this.getActivity());
+			/*createButton.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(this, SpellBlockDetailActivity.class);
+					i.putExtra(SpellBlockDetailFragment.ARG_ITEM_ID, id);
+					startActivity(i);
+				}
+			});*/
+			
+			//creating layout parameters
+			ListView spellBlockListView = new ListView(this.getActivity());
+			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+			        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+			lp.addRule(RelativeLayout.BELOW, createButton.getId());
+			
 			//get all rows as map
-			/*final ArrayAdapter<String> spellBlocksAdapter = new ArrayAdapter<String>(getActivity(),
+			SpellBlockDAO spellBlockDAO = new SpellBlockDAO(this.getActivity());
+			
+			//create array adapter of spell block names
+			final ArrayAdapter<String> spellBlocksAdapter = new ArrayAdapter<String>(getActivity(),
 					android.R.layout.simple_list_item_1, android.R.id.text1, arrayAdapterSpellBlocks);
 			spellBlockListView.setAdapter(spellBlocksAdapter);
-			((ViewGroup) rootView).addView(spellBlockListView);*/
+			((ViewGroup) rootView).addView(spellBlockListView, lp);
 			return rootView;
+		}
+	}
+	
+	public static class DailyListFragment extends Fragment {
+		public static  final String ARG_SECTION_NUMBER = "section_number";
+		
+		private List<String> arrayAdapterDailyList;
+		private Map<String, Integer> arrayAdapterDailyListMap;
+		
+		public DailyListFragment() {
+			
+		}
+		
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+				Bundle savedInstanceState) {
+			
+			return null;
+			
 		}
 	}
 

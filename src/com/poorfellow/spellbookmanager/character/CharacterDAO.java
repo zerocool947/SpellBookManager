@@ -30,11 +30,12 @@ import com.poorfellow.spellbookmanager.database.SpellBookDatabaseManager;
 
 public class CharacterDAO implements SpellBookDatabaseManager {
 	
+	public static final String ROOT_ELEMENT = "character";
 	public static final String NAME = "name";
 	public static final String CHARACTER_LEVEL = "level";
 	public static final String CHARACTER_CLASS = "class";
 	public static final String RACE = "race";
-	public static final String CASTER_LEVEL = "level";
+	public static final String CASTER_LEVEL = "caster-level";
 	public static final String INTELLIGENCE = "int";
 	public static final String DEXTERITY = "dex";
 	public static final String WISDOM = "wis";
@@ -75,9 +76,13 @@ public class CharacterDAO implements SpellBookDatabaseManager {
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			
 			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement(NAME);
-			rootElement.appendChild(doc.createTextNode(character.getName()));
+			
+			Element rootElement = doc.createElement(ROOT_ELEMENT);
 			doc.appendChild(rootElement);
+			
+			Element nameElement = doc.createElement(NAME);
+			nameElement.appendChild(doc.createTextNode(character.getName()));
+			rootElement.appendChild(nameElement);
 			
 			Element levelElement = doc.createElement(CHARACTER_LEVEL);
 			levelElement.appendChild(doc.createTextNode(Integer.toString(character.getLevel())));
@@ -221,6 +226,30 @@ public class CharacterDAO implements SpellBookDatabaseManager {
 	public void updateRow(long rowId, List<DatabaseObject> DBObject) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public String getCharacterDataAsString(long rowId) {
+		db = DBHelper.getWritableDatabase();
+		String characterData = null;
+		Cursor cursor = null;
+		
+		try {
+			cursor = db.query(CHARACTER_TABLE_NAME,
+					new String[] {CHARACTER_TABLE_ROW_DATA}, CHARACTER_TABLE_ROW_ID + " = ?",
+					new String[] {Long.toString(rowId)}, null, null, null);
+			if (!cursor.moveToFirst()){
+				throw new SQLException("No character for character_id " + rowId);
+			}
+			
+			characterData = cursor.getString(0);
+		} catch (SQLException e) {
+			Log.e("DB Error", e.toString());
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+			db.close();
+		}
+		return characterData;
 	}
 
 }

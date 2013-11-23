@@ -85,7 +85,7 @@ public class CharacterListActivity extends Activity {
 	
     @SuppressWarnings("unchecked")
 	private void populateButtons() {
-    	CharacterDAO charDAO = new CharacterDAO(this);         
+    	final CharacterDAO charDAO = new CharacterDAO(this);         
         List<? extends DatabaseObject> characterObjects = charDAO.getAllRows();
 		List<Character> characters = (List<Character>) (List<?>)characterObjects;
         
@@ -96,7 +96,7 @@ public class CharacterListActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					Intent i = new Intent(CharacterListActivity.this, CharacterViewListActivity.class);
-					i.putExtra("character", character);
+					i.putExtra("characterData", charDAO.getCharacterDataAsString(character.getId()));
 					startActivity(i);
 				}
 			});
