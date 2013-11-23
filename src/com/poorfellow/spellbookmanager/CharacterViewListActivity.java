@@ -1,7 +1,10 @@
 package com.poorfellow.spellbookmanager;
 
+import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
+import java.util.Map;
+
+import com.poorfellow.spellbookmanager.spell.SpellBlockDAO;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +19,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class CharacterViewListActivity extends FragmentActivity {
@@ -29,7 +35,6 @@ public class CharacterViewListActivity extends FragmentActivity {
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
-	CharacterViewListPagerAdapter mListPagerAdapter;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -48,10 +53,6 @@ public class CharacterViewListActivity extends FragmentActivity {
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
-		Vector<View> pages = null;
-		Vector<View> buttons = null;
-		
-		mListPagerAdapter = new CharacterViewListPagerAdapter(this, pages, buttons);
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -98,17 +99,37 @@ public class CharacterViewListActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
+			/*Fragment fragment = new DummySectionFragment();
 			Bundle args = new Bundle();
 			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
 			fragment.setArguments(args);
-			return fragment;
+			return fragment;*/
+			Fragment returnFragment = null;
+			
+			switch (position) {
+			case 0:
+				//return spell block fragment
+				Fragment spellBlockFragment = new SpellBlockListFragment();
+				Bundle spellBlockArgs = new Bundle();
+				spellBlockArgs.putInt(SpellBlockListFragment.ARG_SECTION_NUMBER, position + 1);
+				spellBlockFragment.setArguments(spellBlockArgs);
+				returnFragment = spellBlockFragment;
+			case 1:
+				Fragment fragment = new SpellBlockListFragment();
+				Bundle args = new Bundle();
+				args.putInt(SpellBlockListFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);
+				returnFragment = fragment;			
+			}
+			
+			return returnFragment;
+			
 		}
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			// Show 2 total pages.
+			return 2;
 		}
 
 		@Override
@@ -116,11 +137,9 @@ public class CharacterViewListActivity extends FragmentActivity {
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return "iM SPESHUL";
+				return "Spell Blocks";
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return "Spell Lists";
 			}
 			return null;
 		}
@@ -130,12 +149,12 @@ public class CharacterViewListActivity extends FragmentActivity {
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
 	 */
-	public static class DummySectionFragment extends Fragment {
+	//public static class DummySectionFragment extends Fragment {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
+		/*public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
 		}
@@ -151,6 +170,37 @@ public class CharacterViewListActivity extends FragmentActivity {
 			//dummyTextView.setText(Integer.toString(getArguments().getInt(
 				//	ARG_SECTION_NUMBER)));
 			dummyTextView.setText("LOLOLOLOLOLO");
+			Button dummyButton = new Button(this.getActivity());
+			dummyButton.setText("I'm a button!");
+			((ViewGroup) rootView).addView(dummyButton);
+			return rootView;
+		}
+	}*/
+	
+	public static class SpellBlockListFragment extends Fragment {
+		public static  final String ARG_SECTION_NUMBER = "section_number";
+		
+		private List<String> arrayAdapterSpellBlocks;
+		private Map<String, Integer> arrayAdapterSpellBlocksMap;
+
+		
+		public SpellBlockListFragment () {
+			
+		}
+		
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_character_view_list_spell_block, container,
+					false);
+			ListView spellBlockListView = new ListView(this.getActivity());
+			
+			SpellBlockDAO spellBlockDAO = new SpellBlockDAO(this.getActivity());
+			//get all rows as map
+			/*final ArrayAdapter<String> spellBlocksAdapter = new ArrayAdapter<String>(getActivity(),
+					android.R.layout.simple_list_item_1, android.R.id.text1, arrayAdapterSpellBlocks);
+			spellBlockListView.setAdapter(spellBlocksAdapter);
+			((ViewGroup) rootView).addView(spellBlockListView);*/
 			return rootView;
 		}
 	}
