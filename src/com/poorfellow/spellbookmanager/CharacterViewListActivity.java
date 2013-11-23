@@ -97,6 +97,8 @@ public class CharacterViewListActivity extends FragmentActivity {
 	 * one of the sections/tabs/pages.
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+		
+		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -114,24 +116,28 @@ public class CharacterViewListActivity extends FragmentActivity {
 			return fragment;*/
 			Fragment returnFragment = null;
 			
+			Log.d("The position is: ", Integer.toString(position));
+			
 			switch (position) {
 			case 0:
+				Log.d("The position in case 0 is: ", Integer.toString(position));
+
 				//return spell block fragment
 				Fragment spellBlockFragment = new SpellBlockListFragment();
 				Bundle spellBlockArgs = new Bundle();
-				spellBlockArgs.putInt(SpellBlockListFragment.ARG_SECTION_NUMBER, position + 1);
-				spellBlockFragment.setArguments(spellBlockArgs);
-				returnFragment = spellBlockFragment;
+				/*spellBlockArgs.putInt(ARG_SECTION_NUMBER, position + 1);
+				spellBlockFragment.setArguments(spellBlockArgs);*/
+				return spellBlockFragment;
 			case 1:
-				Fragment fragment = new SpellBlockListFragment();
+				Log.d("The position in case 1: ", Integer.toString(position));
+
+				Fragment fragment = new DailyListListFragment();
 				Bundle args = new Bundle();
-				args.putInt(SpellBlockListFragment.ARG_SECTION_NUMBER, position + 1);
-				fragment.setArguments(args);
-				returnFragment = fragment;			
+				/*args.putInt(ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);*/
+				return fragment;			
 			}
-			
-			return returnFragment;
-			
+		return null;			
 		}
 
 		@Override
@@ -147,7 +153,7 @@ public class CharacterViewListActivity extends FragmentActivity {
 			case 0:
 				return "Spell Blocks";
 			case 1:
-				return "Spell Lists";
+				return "Daily Lists";
 			}
 			return null;
 		}
@@ -186,7 +192,6 @@ public class CharacterViewListActivity extends FragmentActivity {
 	}*/
 	
 	public static class SpellBlockListFragment extends Fragment {
-		public static  final String ARG_SECTION_NUMBER = "section_number";
 		
 		private List<String> arrayAdapterSpellBlocks;
 		private Map<String, Integer> arrayAdapterSpellBlocksMap;
@@ -234,13 +239,12 @@ public class CharacterViewListActivity extends FragmentActivity {
 		}
 	}
 	
-	public static class DailyListFragment extends Fragment {
-		public static  final String ARG_SECTION_NUMBER = "section_number";
+	public static class DailyListListFragment extends Fragment {
 		
-		private List<String> arrayAdapterDailyList;
+		private List<String> arrayAdapterDailyLists;
 		private Map<String, Integer> arrayAdapterDailyListMap;
 		
-		public DailyListFragment() {
+		public DailyListListFragment() {
 			
 		}
 		
@@ -248,8 +252,25 @@ public class CharacterViewListActivity extends FragmentActivity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 				Bundle savedInstanceState) {
 			
-			return null;
+			View rootView = inflater.inflate(R.layout.fragment_character_view_list_daily_list, container,
+					false);
+			Button createButton = (Button) rootView.findViewById(R.id.createDailyListButton);
+			View divideContainer = rootView.findViewById(R.id.dailyListDivideContainer);
+			arrayAdapterDailyLists = new ArrayList<String>();
+			arrayAdapterDailyLists.add("Pious Worship");
+			arrayAdapterDailyLists.add("Holy Crusader");
+			arrayAdapterDailyLists.add("All-Out Destruction");
 			
+			ListView dailyListsListView = new ListView(this.getActivity());
+			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+			        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+			lp.addRule(RelativeLayout.BELOW, createButton.getId());
+			
+			final ArrayAdapter<String> dailyListsListAdapter = new ArrayAdapter<String>(getActivity(),
+					android.R.layout.simple_list_item_1, android.R.id.text1, arrayAdapterDailyLists);
+			dailyListsListView.setAdapter(dailyListsListAdapter);
+			((ViewGroup) rootView).addView(dailyListsListView, lp);
+			return rootView;			
 		}
 	}
 

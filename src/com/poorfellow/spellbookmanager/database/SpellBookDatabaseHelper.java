@@ -12,6 +12,9 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		/*
+		 * Creating Tables
+		 */
 		String characterTableQueryString = "create table " +
 				SpellBookDatabaseManager.CHARACTER_TABLE_NAME + 
 				" (" +
@@ -20,19 +23,7 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_DATA + " blob" +
 				");";
 		db.execSQL(characterTableQueryString);
-		
-		/*String YousseffQueryString = "insert into " +
-				SpellBookDatabaseManager.CHARACTER_TABLE_NAME +
-				"(" + 
-				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_ID +
-				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_NAME + 
-				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_DATA + 
-				")" + 
-				"VALUES(" +
-				"1,'Yousseff','<>'" +
-				");";
-		db.execSQL(YousseffQueryString);*/
-		
+
 		String spellTableQueryString = "create table " +
 				SpellBookDatabaseManager.SPELL_TABLE_NAME + 
 				" (" + 
@@ -72,13 +63,16 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 				");";
 		db.execSQL(spellClassLevelTableQueryString);
 		
-		//add foreign key constraints
 		String spellBlockTableQueryString = "create table " +
 		SpellBookDatabaseManager.SPELL_BLOCK_TABLE_NAME +
 		" (" + 
 		SpellBookDatabaseManager.SPELL_BLOCK_ROW_ID + " integer primary key autoincrement not null," +
 		SpellBookDatabaseManager.SPELL_BLOCK_ROW_NAME + " text," +
-		SpellBookDatabaseManager.SPELL_BLOCK_ROW_CHARACTER_ID + " integer" +
+		SpellBookDatabaseManager.SPELL_BLOCK_ROW_CHARACTER_ID + " integer," +
+		"FOREIGN KEY(" +
+		SpellBookDatabaseManager.SPELL_BLOCK_ROW_CHARACTER_ID + ") REFERENCES " +
+		SpellBookDatabaseManager.CHARACTER_TABLE_NAME + "(" +
+		SpellBookDatabaseManager.CHARACTER_TABLE_ROW_ID + ")" +
 		");";
 		
 		db.execSQL(spellBlockTableQueryString);
@@ -100,17 +94,48 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 		");";
 		
 		db.execSQL(spellBlockSheetTableQueryString);
-		/*db.execSQL("insert into " +
-		SpellBookDatabaseManager.SPELL_CLASS_LEVEL_TABLE_NAME +
-		"(" + 
-		SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_SPELL_ID + ", " + 
-		SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_CLASS + ", " + 
-		SpellBookDatabaseManager.SPELL_CLASS_LEVEL_ROW_LEVEL + 
-		")"+
-		"VALUES(" + 
-		"${id},${className},${level});");*/
 		
+		String dailyListTableQueryString = "create table " + 
+		SpellBookDatabaseManager.DAILY_LIST_TABLE_NAME + 
+		" (" +
+		SpellBookDatabaseManager.DAILY_LIST_ROW_ID + " integer primary key autoincrement not null," +
+		SpellBookDatabaseManager.DAILY_LIST_ROW_NAME + " text," +
+		SpellBookDatabaseManager.DAILY_LIST_ROW_TYPE + " text," +
+		SpellBookDatabaseManager.DAILY_LIST_ROW_CHARACTER_ID + " integer," +
+		"FOREIGN KEY(" + 
+		SpellBookDatabaseManager.DAILY_LIST_ROW_CHARACTER_ID + ") REFERENCES " +
+		SpellBookDatabaseManager.CHARACTER_TABLE_NAME +"(" +
+		SpellBookDatabaseManager.CHARACTER_TABLE_ROW_ID + ")"+
+		");";
 		
+		db.execSQL(dailyListTableQueryString);
+		
+		String dailyListSheetTableQueryString = "create table " +
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_TABLE_NAME + 
+		" (" +
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_ROW_ID + " integer primary key autoincrement not null," +
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_ROW_DAILY_LIST_ID + " integer," +
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_ROW_SPELL_BLOCK_ID + " integer," + 
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_ROW_SPELL_ID + " integer not null," + 
+		"FOREIGN KEY(" +
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_ROW_DAILY_LIST_ID + ") REFERENCES " +
+		SpellBookDatabaseManager.DAILY_LIST_TABLE_NAME + "(" +
+		SpellBookDatabaseManager.DAILY_LIST_ROW_ID + ")," +
+		"FOREIGN KEY(" +
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_ROW_SPELL_BLOCK_ID + ") REFERENCES " +
+		SpellBookDatabaseManager.SPELL_BLOCK_TABLE_NAME + "(" +
+		SpellBookDatabaseManager.SPELL_BLOCK_ROW_ID + ")," +
+		"FOREIGN KEY(" +
+		SpellBookDatabaseManager.DAILY_LIST_SHEET_ROW_SPELL_ID + ") REFERENCES " +
+		SpellBookDatabaseManager.SPELL_TABLE_NAME + "(" +
+		SpellBookDatabaseManager.SPELL_TABLE_ROW_ID + ")" +
+		");";		
+		
+		db.execSQL(dailyListSheetTableQueryString);
+		
+		/*
+		 * Data population
+		 */
 		
 		String yousseffQueryString = "insert into " +
 				SpellBookDatabaseManager.CHARACTER_TABLE_NAME +
