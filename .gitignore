@@ -21,3 +21,9 @@ local.properties
 
 # Eclipse settings folder
 .settings/
+
+#################
+## IntelliJ
+#################
+
+*.ini
