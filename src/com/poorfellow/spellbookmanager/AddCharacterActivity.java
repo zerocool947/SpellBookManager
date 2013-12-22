@@ -24,6 +24,8 @@ public class AddCharacterActivity extends Activity {
 	private EditText mConstitutionEdit;
 	private EditText mWisdomEdit;
 	private EditText mCharismaEdit;
+
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
