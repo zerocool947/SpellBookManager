@@ -211,15 +211,15 @@ public class CharacterViewListActivity extends FragmentActivity {
 			arrayAdapterSpellBlocks.add("Utility Block");
 			arrayAdapterSpellBlocks.add("Offensive Block");
 			
-			/*createButton.setOnClickListener(new View.OnClickListener() {
+			createButton.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					Intent i = new Intent(this, SpellBlockDetailActivity.class);
-					i.putExtra(SpellBlockDetailFragment.ARG_ITEM_ID, id);
+					Intent i = new Intent(getActivity(), CreateSpellBlockActivity.class);
+					//i.putExtra(SpellBlockDetailFragment.ARG_ITEM_ID, id);
 					startActivity(i);
 				}
-			});*/
+			});
 			
 			//creating layout parameters
 			ListView spellBlockListView = new ListView(this.getActivity());
