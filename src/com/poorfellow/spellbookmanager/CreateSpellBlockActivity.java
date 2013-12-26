@@ -11,18 +11,20 @@ import com.poorfellow.spellbookmanager.spell.SpellListAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ExpandableListActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 
-public class CreateSpellBlockActivity extends Activity {
+public class CreateSpellBlockActivity extends ExpandableListActivity {
 	
 	private SpellListAdapter mSpellListAdapter;
 	private List<String> mSpellNamesList;
 	private Map<String, Integer> mSpellsMap;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,11 +36,11 @@ public class CreateSpellBlockActivity extends Activity {
 		mSpellsMap = spellDAO.getAllRowsAsMap();
 		mSpellNamesList = (List<String>) (List<?>) Arrays.asList(mSpellsMap.keySet().toArray());
 
-		Collections.sort(mSpellNamesList);		
+		/*(Collections.sort(mSpellNamesList);		
 		mSpellListAdapter = new SpellListAdapter(this, R.layout.list_adapter_spell, mSpellNamesList);
 		
 		ListView spellsList = (ListView) this.findViewById(R.id.selectSpellsList);
-		spellsList.setAdapter(mSpellListAdapter);
+		spellsList.setAdapter(mSpellListAdapter);*/
 		
 	}
 
