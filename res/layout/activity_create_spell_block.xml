@@ -7,13 +7,40 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CreateSpellBlockActivity" >
+    
+    <TextView 
+        android:id="@+id/spellBlockNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Spelll Block Name:"
+        android:layout_alignBaseline="@+id/spellBlockNameField"
+        />
+    
+     <EditText
+        android:id="@+id/spellBlockNameField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/spellBlockNameText"
+        android:ems="7" />
+    <Button
+        android:id="@+id/createSpellBlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/spellBlockNameField"
+		android:layout_alignLeft="@id/spellBlockNameText"
+        android:text="Create Spell Block" />
+
 
     <ListView
         android:id="@+id/selectSpellsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
+        android:layout_centerVertical="true" 
+        android:layout_below="@id/createSpellBlock">
     </ListView>
+
+    
 
 </RelativeLayout>
