@@ -133,6 +133,21 @@ public class SpellBookDatabaseHelper extends SQLiteOpenHelper {
 		
 		db.execSQL(dailyListSheetTableQueryString);
 		
+		/*
+		 * Adding Default Character
+		 */
+		String yousseffQueryString = "insert into " +
+				SpellBookDatabaseManager.CHARACTER_TABLE_NAME +
+				"(" +
+				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_NAME + "," +
+				SpellBookDatabaseManager.CHARACTER_TABLE_ROW_DATA +
+				")" + 
+				"VALUES(" +
+				"'Yousseff'," +
+				"'<character><name>Youssef</name><level>7</level><caster-level>7</caster-level><class>cleric</class><turn-attempts>7</turn-attempts><race>human</race><stats><int>9</int><str>14</str><dex>10</dex><con>14</con><wis>20</wis><cha>12</cha></stats></character>'" +
+				");";
+		db.execSQL(yousseffQueryString);
+		
 		
 		/*
 		 * Data population
