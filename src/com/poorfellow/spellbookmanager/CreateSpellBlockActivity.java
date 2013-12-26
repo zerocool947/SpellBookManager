@@ -1,47 +1,19 @@
 package com.poorfellow.spellbookmanager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import com.poorfellow.spellbookmanager.spell.SpellDAO;
-import com.poorfellow.spellbookmanager.spell.SpellListAdapter;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ExpandableListActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 
-public class CreateSpellBlockActivity extends ExpandableListActivity {
-	
-	private SpellListAdapter mSpellListAdapter;
-	private List<String> mSpellNamesList;
-	private Map<String, Integer> mSpellsMap;
+public class CreateSpellBlockActivity extends Activity {
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_spell_block);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
-		SpellDAO spellDAO = new SpellDAO(this);
-		mSpellsMap = spellDAO.getAllRowsAsMap();
-		mSpellNamesList = (List<String>) (List<?>) Arrays.asList(mSpellsMap.keySet().toArray());
-
-		/*(Collections.sort(mSpellNamesList);		
-		mSpellListAdapter = new SpellListAdapter(this, R.layout.list_adapter_spell, mSpellNamesList);
-		
-		ListView spellsList = (ListView) this.findViewById(R.id.selectSpellsList);
-		spellsList.setAdapter(mSpellListAdapter);*/
-		
 	}
 
 	/**
