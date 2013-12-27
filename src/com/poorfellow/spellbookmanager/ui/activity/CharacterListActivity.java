@@ -1,4 +1,4 @@
-package com.poorfellow.spellbookmanager;
+package com.poorfellow.spellbookmanager.ui.activity;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.support.v4.app.NavUtils;
 
+import com.poorfellow.spellbookmanager.R;
 import com.poorfellow.spellbookmanager.database.DatabaseObject;
 import com.poorfellow.spellbookmanager.dummy.DummyContent;
 import com.poorfellow.spellbookmanager.character.CharacterDAO;

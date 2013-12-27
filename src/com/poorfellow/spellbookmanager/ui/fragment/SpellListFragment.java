@@ -1,4 +1,4 @@
-package com.poorfellow.spellbookmanager;
+package com.poorfellow.spellbookmanager.ui.fragment;
 
 import java.util.Arrays;
 import java.util.Collections;

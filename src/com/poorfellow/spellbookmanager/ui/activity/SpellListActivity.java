@@ -1,4 +1,10 @@
-package com.poorfellow.spellbookmanager;
+package com.poorfellow.spellbookmanager.ui.activity;
+
+import com.poorfellow.spellbookmanager.R;
+import com.poorfellow.spellbookmanager.R.id;
+import com.poorfellow.spellbookmanager.R.layout;
+import com.poorfellow.spellbookmanager.ui.fragment.SpellDetailFragment;
+import com.poorfellow.spellbookmanager.ui.fragment.SpellListFragment;
 
 import android.content.Intent;
 import android.os.Bundle;

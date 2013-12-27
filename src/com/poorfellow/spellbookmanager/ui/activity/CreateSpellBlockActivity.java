@@ -1,4 +1,4 @@
-package com.poorfellow.spellbookmanager;
+package com.poorfellow.spellbookmanager.ui.activity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.poorfellow.spellbookmanager.R;
+import com.poorfellow.spellbookmanager.R.id;
+import com.poorfellow.spellbookmanager.R.layout;
+import com.poorfellow.spellbookmanager.R.menu;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
 import com.poorfellow.spellbookmanager.spell.SpellListAdapter;
 

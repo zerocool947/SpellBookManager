@@ -1,4 +1,4 @@
-package com.poorfellow.spellbookmanager;
+package com.poorfellow.spellbookmanager.ui.fragment;
 
 import java.util.Map;
 
@@ -11,8 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.poorfellow.spellbookmanager.R;
+import com.poorfellow.spellbookmanager.R.id;
+import com.poorfellow.spellbookmanager.R.layout;
 import com.poorfellow.spellbookmanager.spell.Spell;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
+import com.poorfellow.spellbookmanager.ui.activity.SpellDetailActivity;
+import com.poorfellow.spellbookmanager.ui.activity.SpellListActivity;
 
 /**
  * A fragment representing a single Spell detail screen. This fragment is either
