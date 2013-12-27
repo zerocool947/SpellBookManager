@@ -14,7 +14,7 @@ import com.poorfellow.spellbookmanager.spell.SpellDAO;
 import com.poorfellow.spellbookmanager.spell.SpellFilter;
 import com.poorfellow.spellbookmanager.spell.SpellListAdapter;
 import com.poorfellow.spellbookmanager.ui.fragment.SpellFilterFragment;
-import com.poorfellow.spellbookmanager.ui.fragment.SpellFilterFragment.spellFilterTunnel;
+import com.poorfellow.spellbookmanager.ui.fragment.SpellFilterFragment.SpellFilterTunnel;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -31,7 +31,7 @@ import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 
 public class CreateSpellBlockActivity extends Activity
-	implements spellFilterTunnel{
+	implements SpellFilterTunnel{
 	
 	private SpellListAdapter mSpellListAdapter;
 	private List<String> mSpellNamesList;
@@ -112,7 +112,7 @@ public class CreateSpellBlockActivity extends Activity
 	@Override
 	public void deliverSpellfilter(SpellFilter spellFilter) {
 		this.mSpellFilter = spellFilter;
-		
+		System.out.println("I got a spell filter!");
 	}
 
 }
