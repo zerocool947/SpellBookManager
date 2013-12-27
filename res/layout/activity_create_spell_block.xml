@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Spelll Block Name:"
+        android:text="Spell Block Name:"
         android:layout_alignBaseline="@+id/spellBlockNameField"
         />
     
