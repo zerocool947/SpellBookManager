@@ -1,10 +1,12 @@
 package com.poorfellow.spellbookmanager.spell;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SpellFilter {
+@SuppressWarnings("serial")
+public class SpellFilter implements Serializable {
 	
 	private List<String> rawSpellList;
 	private Map<String, String> classLevelMap;

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+	<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" >
+	    
+	    <TextView 
+	        android:id="@+id/classText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Class:"
+	        android:layout_alignBaseline="@+id/classDropDown"
+	        />
+	    <Spinner 
+	        android:id="@+id/classDropDown"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@id/classText"
+	        />
+	    <TextView
+	        android:id="@+id/levelText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Level:"
+	        android:layout_toRightOf="@id/classDropDown"
+	        android:visibility="gone"
+   	        android:layout_alignBaseline="@+id/classDropDown"
+	        />
+	    <Spinner 
+	        android:id="@+id/levelDropDown"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/levelText"
+	        android:visibility="gone"
+      	    android:layout_alignBaseline="@+id/classDropDown"
+   	        />
+	    
+	
+	</RelativeLayout>
+</ScrollView>
