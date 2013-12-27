@@ -17,7 +17,6 @@ import android.support.v4.app.NavUtils;
 
 import com.poorfellow.spellbookmanager.R;
 import com.poorfellow.spellbookmanager.database.DatabaseObject;
-import com.poorfellow.spellbookmanager.dummy.DummyContent;
 import com.poorfellow.spellbookmanager.character.CharacterDAO;
 import com.poorfellow.spellbookmanager.character.Character;
 
