@@ -103,8 +103,12 @@ public class SpellFilterFragment extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
+				if (mSpellFilter == null) {
+					mSpellFilter = new SpellFilter();
+				}
 				populateFilter();
 				mCallback.deliverSpellfilter(mSpellFilter);
+				//need to trigger a redraw here
 				getDialog().dismiss();
 			}
         });
@@ -115,8 +119,13 @@ public class SpellFilterFragment extends DialogFragment {
 	 public void populateFilter() {
 		 String selectedClass = (String) mClassSpinner.getSelectedItem();
 		 String selectedLevel = (String) mLevelSpinner.getSelectedItem();
+		 String dbClass = "";
 		 
-		 mSpellFilter.addClassLevel(selectedClass, selectedLevel);
+		 if (selectedClass == "Cleric") {
+			 dbClass = "clr";
+		 }
+		 
+		 mSpellFilter.addFilterClassLevel(selectedClass, selectedLevel);
 		 
 		 Log.d("STATUS", "The Selected class was " + selectedClass);
 	 }

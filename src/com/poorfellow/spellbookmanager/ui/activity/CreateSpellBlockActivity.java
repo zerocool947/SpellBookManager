@@ -1,15 +1,11 @@
 package com.poorfellow.spellbookmanager.ui.activity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import com.poorfellow.spellbookmanager.R;
-import com.poorfellow.spellbookmanager.R.id;
-import com.poorfellow.spellbookmanager.R.layout;
-import com.poorfellow.spellbookmanager.R.menu;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
 import com.poorfellow.spellbookmanager.spell.SpellFilter;
 import com.poorfellow.spellbookmanager.spell.SpellListAdapter;
@@ -20,12 +16,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.support.v4.app.NavUtils;
@@ -38,6 +33,17 @@ public class CreateSpellBlockActivity extends Activity
 	private Map<Integer, String> mSpellsMap;
 	private SpellFilter mSpellFilter;
 	private Button mFilterButton;
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		if (mSpellFilter != null) {
+			Map<Integer, List<Integer>> returnedSpells = mSpellFilter.filterRawSpells(this);
+		}
+		
+		Log.d("STATUS", "This is a test. I'm resuming!");
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +53,12 @@ public class CreateSpellBlockActivity extends Activity
 		setupActionBar();
 		
 		if (mSpellFilter != null) {
+			Log.d("STATUS", "I'm filtering spells!!!!");
 			mSpellFilter.filterRawSpells(this);
 		}
-		
+
+		Log.d("STATUS", "I'm Creating the activity!!!!");
+
 		SpellDAO spellDAO = new SpellDAO(this);
 		mSpellsMap = spellDAO.getAllRowsAsMap();
 		mSpellNamesList = new ArrayList<String>(mSpellsMap.values());
