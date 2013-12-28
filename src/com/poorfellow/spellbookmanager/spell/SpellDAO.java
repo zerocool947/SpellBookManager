@@ -156,9 +156,9 @@ public class SpellDAO implements SpellBookDatabaseManager {
 		return spells;
 	}
 	
-	public Map<String, Integer> getAllRowsAsMap() {
+	public Map<Integer, String> getAllRowsAsMap() {
 		db = DBHelper.getWritableDatabase();
-		Map<String, Integer> spells = new HashMap<String, Integer>();
+		Map<Integer, String> spells = new HashMap<Integer, String>();
 		Cursor spellCursor = null;
 		
 		try {
@@ -172,7 +172,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					int id = spellCursor.getInt(0);
 					String name = spellCursor.getString(1);
 					
-					spells.put(name, Integer.valueOf(id));
+					spells.put(Integer.valueOf(id), name);
 				} while(spellCursor.moveToNext());
 			}
 		} catch (SQLException e) {

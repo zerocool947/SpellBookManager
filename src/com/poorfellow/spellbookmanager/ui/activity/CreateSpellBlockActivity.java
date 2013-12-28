@@ -35,7 +35,7 @@ public class CreateSpellBlockActivity extends Activity
 	
 	private SpellListAdapter mSpellListAdapter;
 	private List<String> mSpellNamesList;
-	private Map<String, Integer> mSpellsMap;
+	private Map<Integer, String> mSpellsMap;
 	private SpellFilter mSpellFilter;
 	private Button mFilterButton;
 
@@ -52,7 +52,7 @@ public class CreateSpellBlockActivity extends Activity
 		
 		SpellDAO spellDAO = new SpellDAO(this);
 		mSpellsMap = spellDAO.getAllRowsAsMap();
-		mSpellNamesList = (List<String>) (List<?>) Arrays.asList(mSpellsMap.keySet().toArray());
+		mSpellNamesList = new ArrayList<String>(mSpellsMap.values());
 
 		Collections.sort(mSpellNamesList);		
 		mSpellListAdapter = new SpellListAdapter(this, R.layout.list_adapter_spell, mSpellNamesList);
