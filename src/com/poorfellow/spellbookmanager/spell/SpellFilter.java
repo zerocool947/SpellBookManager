@@ -2,17 +2,20 @@ package com.poorfellow.spellbookmanager.spell;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import android.content.Context;
 
 @SuppressWarnings("serial")
 public class SpellFilter implements Serializable {
 	
-	private List<String> rawSpellList;
 	private Map<String, String> classLevelMap;
+	private Map<String, Integer> rawSpellsMap;
 	
-	public SpellFilter(List<String> spells, Map<String, String> classLevels) {
-		this.rawSpellList = spells;
+	public SpellFilter(Map<String, Integer> spells, Map<String, String> classLevels) {
+		this.rawSpellsMap = spells;
 		this.classLevelMap = classLevels;
 	}
 	
@@ -48,6 +51,14 @@ public class SpellFilter implements Serializable {
 		addClassLevel(className, String.valueOf(level));
 	}
 	
+	public void setSpellMap(Map<String, Integer> spellMap) {
+		this.rawSpellsMap = spellMap;
+	}
 	
-
+	public Map<String, String> filterRawSpells(Context context) {
+		SpellDAO spellDAO = new SpellDAO(context); 
+		//making the map make sense, brb
+		
+		return null;
+	}
 }

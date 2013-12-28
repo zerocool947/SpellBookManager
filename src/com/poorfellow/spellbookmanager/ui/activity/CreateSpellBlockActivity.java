@@ -46,6 +46,10 @@ public class CreateSpellBlockActivity extends Activity
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		if (mSpellFilter != null) {
+			mSpellFilter.filterRawSpells(this);
+		}
+		
 		SpellDAO spellDAO = new SpellDAO(this);
 		mSpellsMap = spellDAO.getAllRowsAsMap();
 		mSpellNamesList = (List<String>) (List<?>) Arrays.asList(mSpellsMap.keySet().toArray());
