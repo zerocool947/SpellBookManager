@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import com.poorfellow.spellbookmanager.database.DatabaseObject;
 import com.poorfellow.spellbookmanager.database.SpellBookDatabaseHelper;
 import com.poorfellow.spellbookmanager.database.SpellBookDatabaseManager;
 
+@SuppressLint("UseSparseArrays")
 public class SpellDAO implements SpellBookDatabaseManager {
 
 	private SpellBookDatabaseHelper DBHelper;
@@ -268,6 +270,35 @@ public class SpellDAO implements SpellBookDatabaseManager {
 	public Spell getSpellById(String spellId) {
 		// TODO Auto-generated method stub
 		return getSpellById(Long.valueOf(spellId));
+	}
+
+	public List<Integer> getAlllRowsIds() {
+		db = DBHelper.getWritableDatabase();
+		List<Integer> spells = new ArrayList<Integer>();
+		Cursor spellCursor = null;
+		
+		try {
+			spellCursor = db.query(SPELL_TABLE_NAME, new String[] {SPELL_TABLE_ROW_ID}, 
+					null, null, null, null, null);
+			
+			spellCursor.moveToFirst();
+			
+			if (!spellCursor.isAfterLast()) {
+				do {
+					int id = spellCursor.getInt(0);
+					
+					spells.add(Integer.valueOf(id));
+				} while(spellCursor.moveToNext());
+			}
+		} catch (SQLException e) {
+			Log.e("DB Error", e.toString());
+			e.printStackTrace();
+		}  finally {
+			spellCursor.close();
+			db.close();
+		}
+		
+		return spells;
 	}
 	
 	

@@ -1,8 +1,5 @@
 package com.poorfellow.spellbookmanager.ui.fragment;
 
-import com.poorfellow.spellbookmanager.R;
-import com.poorfellow.spellbookmanager.spell.SpellFilter;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
@@ -18,6 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.poorfellow.spellbookmanager.R;
+import com.poorfellow.spellbookmanager.spell.SpellFilter;
 
 public class SpellFilterFragment extends DialogFragment {
 
@@ -137,8 +137,11 @@ public class SpellFilterFragment extends DialogFragment {
 		 if (selectedClass == "Cleric") {
 			 dbClass = "clr";
 		 }
+		 if (selectedLevel == "All") {
+			 selectedLevel = "0,1,7,3,4";
+		 }
 		 
-		 mSpellFilter.addFilterClassLevel(selectedClass, selectedLevel);
+		 mSpellFilter.addPreFilterClassLevel(selectedClass, selectedLevel);
 		 
 		 Log.d("STATUS", "The Selected class was " + selectedClass);
 	 }

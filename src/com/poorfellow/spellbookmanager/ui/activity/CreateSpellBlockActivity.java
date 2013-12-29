@@ -4,6 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.poorfellow.spellbookmanager.R;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
@@ -11,19 +24,6 @@ import com.poorfellow.spellbookmanager.spell.SpellFilter;
 import com.poorfellow.spellbookmanager.spell.SpellListAdapter;
 import com.poorfellow.spellbookmanager.ui.fragment.SpellFilterFragment;
 import com.poorfellow.spellbookmanager.ui.fragment.SpellFilterFragment.SpellFilterTunnel;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.support.v4.app.NavUtils;
 
 public class CreateSpellBlockActivity extends Activity
 	implements SpellFilterTunnel{
@@ -33,24 +33,9 @@ public class CreateSpellBlockActivity extends Activity
 	private Map<Integer, String> mSpellsMap;
 	private SpellFilter mSpellFilter;
 	private Button mFilterButton;
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		
-		if (mSpellFilter != null) {
-			Map<Integer, List<Integer>> returnedSpells = mSpellFilter.filterRawSpells(this);
-		}
-		
-		Log.d("STATUS", "This is a test. I'm restoring my state!!!!");
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.d("STATUS", "This is a test. I'm pausing!!!!");
-
-	}
+	private Map<Integer, List<Integer>> mFilteredSpellsMap;
+	private Set<Integer> mFilteredGroupsList;
+	private List<Integer> mSpellsIdsList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +45,7 @@ public class CreateSpellBlockActivity extends Activity
 		setupActionBar();
 		
 		if (mSpellFilter != null) {
-			Log.d("STATUS", "I'm filtering spells!!!!");
+			Log.d("STATUS", "I'm filtering spells in on create!!!!");
 			mSpellFilter.filterRawSpells(this);
 		}
 
@@ -68,6 +53,10 @@ public class CreateSpellBlockActivity extends Activity
 
 		SpellDAO spellDAO = new SpellDAO(this);
 		mSpellsMap = spellDAO.getAllRowsAsMap();
+		mSpellsIdsList = spellDAO.getAlllRowsIds();
+		
+		//get this list as just a list of Ids, add the DB method
+		//List<Integer> spellsList = spellDAO.getAlllRowsIds();
 		mSpellNamesList = new ArrayList<String>(mSpellsMap.values());
 
 		Collections.sort(mSpellNamesList);		
@@ -141,17 +130,28 @@ public class CreateSpellBlockActivity extends Activity
 	public void updateSpellListView() {
 		// TODO Auto-generated method stub
 		mFilterButton.setText("HOLY SHIT IT WORKS!");
+		
+		//fix once you get a real DB lookup
+		mSpellFilter.setFilterSpellMap(mSpellsIdsList);
+		mSpellFilter.filterRawSpells(this.getApplicationContext());
 		populateSpellListView();
-		Map<String, String> printMe = mSpellFilter.getFilterClassLevelMap();
-		for(String name : printMe.keySet()) {
-			System.out.println("My class is " + name);
-			System.out.println("My Level is " + printMe.get(name));
-		}
 		
 	}
 	
 	public void populateSpellListView() {
+		mFilteredSpellsMap = mSpellFilter.getFilteredSpells();
+		mFilteredGroupsList = mSpellFilter.getFilteredGroups();
 		
+		for(Integer level : mFilteredGroupsList) {
+			Log.d("STATUS", "My filtered group Set value is " + level);
+		}
+		
+		List<Integer> test = new ArrayList<Integer>(mFilteredGroupsList);
+		Log.d("STATUS", "Atfer conversion to array");
+		for(Integer level : test) {
+			Log.d("STATUS", "My Filtered Group List value is " + level + " and the index is " + test.indexOf(level));
+
+		}
 	}
 
 }

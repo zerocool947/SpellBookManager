@@ -5,19 +5,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import android.content.Context;
+import android.util.Log;
 
 @SuppressWarnings("serial")
 public class SpellFilter implements Serializable {
 	
+	//Key is the level, value is the spell ID
 	private Map<Integer, List<Integer>> filteredSpellsMap;
-	private Map<String, String> filterClassLevelMap;
-	private Map<Integer, String> filterSpellsMap;
 	
-	public SpellFilter(Map<Integer, String> spells, Map<String, String> classLevels) {
-		this.filterSpellsMap = spells;
+	//Key is absolute position (sequential), value is the level
+	private Set<Integer> filteredGroupsList; 
+	private Map<String, String> filterClassLevelMap;
+	
+	//Key is the Id, string is the name
+	private List<Integer> preFilterSpellsList;
+			
+	public SpellFilter(List<Integer> spells, Map<String, String> classLevels) {
+		Log.d("STATUS", "Instantiating SpellFilter");
+		this.preFilterSpellsList = spells;
 		this.filterClassLevelMap = classLevels;
+		this.filteredSpellsMap = new HashMap<Integer, List<Integer>>();
+		this.filteredGroupsList = new TreeSet<Integer>();
+		
 	}
 	
 	public SpellFilter() {
@@ -34,7 +47,7 @@ public class SpellFilter implements Serializable {
 	/*
 	 * First string is the class, second string is a comma separated list of levels
 	 */
-	public void addFilterClassLevel(String className, String level) {
+	public void addPreFilterClassLevel(String className, String level) {
 		if (filterClassLevelMap == null) {
 			filterClassLevelMap = new HashMap<String, String>();
 		}
@@ -52,42 +65,63 @@ public class SpellFilter implements Serializable {
 	/*
 	 * First string is the class, second string is a level
 	 */
-	public void addFilterClassLevel(String className, Integer level) {
-		addFilterClassLevel(className, String.valueOf(level));
+	public void addPreFilterClassLevel(String className, Integer level) {
+		addPreFilterClassLevel(className, String.valueOf(level));
 	}
 	
-	public void setFilterSpellMap(Map<Integer, String> spellMap) {
-		this.filterSpellsMap = spellMap;
+	public void setFilterSpellMap(List<Integer> spellMap) {
+		this.preFilterSpellsList = spellMap;
 	}
 	
-	public Map<Integer, List<Integer>> filterRawSpells(Context context) {
+	public void filterRawSpells(Context context) {
 		SpellDAO spellDAO = new SpellDAO(context); 
 		
-		for(Integer id : filterSpellsMap.keySet()) {
+		for(String className : filterClassLevelMap.keySet()) {
+			String classLevels = filterClassLevelMap.get(className);
+			
+			for (String level : classLevels.split(",")) {
+				filteredGroupsList.add(Integer.valueOf(level));
+			}
+		}
+		
+				
+		for(Integer spellId : preFilterSpellsList) {
 			//Make a retriever for just the class/level map
 			//or better yet, do the whole logic with a DB query
-			Spell spell = spellDAO.getSpellById(id);
+			Spell spell = spellDAO.getSpellById(spellId);
 			Map<String, Integer> spellClassLevels = spell.getLevel();
 			
 			for (String filterClass : filterClassLevelMap.keySet()) {
 				if(spellClassLevels.containsKey(filterClass.toLowerCase())) {
-					addToFilteredSpellsMap(id, filterClass, (int) spell.getId());
+					Integer filterLevel = spellClassLevels.get(filterClass);
+					if (filterClassLevelMap.get(filterClass).contains(Integer.toString(filterLevel))) {
+						addToFilteredSpellsMap(spellId, filterClass, filterLevel);
+					}
 				}
 			}
 		}
-		
-		return filteredSpellsMap;
 	}
 
-	public void addToFilteredSpellsMap(Integer id, String filterClass, Integer spellId) {
-		if (!filteredSpellsMap.containsKey(id)) {
-			filteredSpellsMap.put(id, new ArrayList<Integer>());
+	public void addToFilteredSpellsMap(Integer spellId, String filterClass, Integer filterLevel) {
+		if (!filteredSpellsMap.containsKey(filterLevel)) {
+			filteredSpellsMap.put(filterLevel, new ArrayList<Integer>());
 		}
 
-		filteredSpellsMap.get(id).add(spellId);
+		filteredSpellsMap.get(filterLevel).add(spellId);
+				
 	}
 	
 	public Map<String, String> getFilterClassLevelMap() {
 		return filterClassLevelMap;
+	}
+
+	public Map<Integer, List<Integer>> getFilteredSpells() {
+		// TODO Auto-generated method stub
+		return filteredSpellsMap;
+	}
+	
+	public Set<Integer> getFilteredGroups() {
+		
+		return filteredGroupsList;
 	}
 }
