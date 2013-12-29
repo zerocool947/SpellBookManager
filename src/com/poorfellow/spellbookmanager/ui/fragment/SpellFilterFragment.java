@@ -5,6 +5,7 @@ import com.poorfellow.spellbookmanager.spell.SpellFilter;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +29,8 @@ public class SpellFilterFragment extends DialogFragment {
 	Button mConfirmFilterButton;
 	
     public interface SpellFilterTunnel {
-        public void deliverSpellfilter(SpellFilter spellFilter);
+        public void deliverSpellFilter(SpellFilter spellFilter);
+        public void updateSpellListView();
     }
 	
 	public static SpellFilterFragment newInstance(SpellFilter spellFilter) {
@@ -59,6 +61,7 @@ public class SpellFilterFragment extends DialogFragment {
         View v = inflater.inflate(R.layout.fragment_spell_filter, container, false);
         getDialog().setTitle("Spell Filter Options");
         getDialog().setCanceledOnTouchOutside(false);
+        
         
         mClassSpinner = (Spinner) v.findViewById(R.id.classDropDown);
         mLevelSpinner = (Spinner) v.findViewById(R.id.levelDropDown);
@@ -106,14 +109,23 @@ public class SpellFilterFragment extends DialogFragment {
 				if (mSpellFilter == null) {
 					mSpellFilter = new SpellFilter();
 				}
+				//these calls need to stay here. consider the back button
 				populateFilter();
-				mCallback.deliverSpellfilter(mSpellFilter);
-				//need to trigger a redraw here
-				getDialog().dismiss();
+				mCallback.deliverSpellFilter(mSpellFilter);
+				dismiss();
 			}
         });
 	        
         return v;
+	 }
+	 
+	 @Override
+	 public void onDismiss(DialogInterface dialog) {
+	 	super.onDismiss(dialog);
+
+		mCallback.updateSpellListView();
+		 
+		
 	 }
 	 
 	 public void populateFilter() {

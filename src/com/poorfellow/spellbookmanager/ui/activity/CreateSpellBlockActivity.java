@@ -35,16 +35,23 @@ public class CreateSpellBlockActivity extends Activity
 	private Button mFilterButton;
 	
 	@Override
-	protected void onResume() {
-		super.onResume();
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
 		
 		if (mSpellFilter != null) {
 			Map<Integer, List<Integer>> returnedSpells = mSpellFilter.filterRawSpells(this);
 		}
 		
-		Log.d("STATUS", "This is a test. I'm resuming!");
+		Log.d("STATUS", "This is a test. I'm restoring my state!!!!");
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d("STATUS", "This is a test. I'm pausing!!!!");
+
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,6 +91,8 @@ public class CreateSpellBlockActivity extends Activity
 			    // Create and show the dialog.
 			    DialogFragment newFragment = SpellFilterFragment.newInstance(mSpellFilter);
 			    newFragment.show(ft, "dialog");
+			    
+			    
 			}
 		});
 		
@@ -123,9 +132,16 @@ public class CreateSpellBlockActivity extends Activity
 	}
 
 	@Override
-	public void deliverSpellfilter(SpellFilter spellFilter) {
+	public void deliverSpellFilter(SpellFilter spellFilter) {
 		this.mSpellFilter = spellFilter;
 		System.out.println("I got a spell filter!");
+	}
+
+	@Override
+	public void updateSpellListView() {
+		// TODO Auto-generated method stub
+		mFilterButton.setText("HOLY SHIT IT WORKS!");
+		
 	}
 
 }
