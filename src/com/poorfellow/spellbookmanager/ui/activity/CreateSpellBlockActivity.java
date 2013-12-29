@@ -71,10 +71,10 @@ public class CreateSpellBlockActivity extends Activity
 		mSpellNamesList = new ArrayList<String>(mSpellsMap.values());
 
 		Collections.sort(mSpellNamesList);		
-		mSpellListAdapter = new SpellListAdapter(this, R.layout.list_adapter_spell, mSpellNamesList);
+		/*mSpellListAdapter = new SpellListAdapter(this, R.layout.list_adapter_spell, mSpellNamesList);
 		
 		ListView spellsList = (ListView) this.findViewById(R.id.selectSpellsList);
-		spellsList.setAdapter(mSpellListAdapter);
+		spellsList.setAdapter(mSpellListAdapter);*/
 		
 		mFilterButton = (Button) this.findViewById(R.id.filterSpellsButton);
 		mFilterButton.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +141,16 @@ public class CreateSpellBlockActivity extends Activity
 	public void updateSpellListView() {
 		// TODO Auto-generated method stub
 		mFilterButton.setText("HOLY SHIT IT WORKS!");
+		populateSpellListView();
+		Map<String, String> printMe = mSpellFilter.getFilterClassLevelMap();
+		for(String name : printMe.keySet()) {
+			System.out.println("My class is " + name);
+			System.out.println("My Level is " + printMe.get(name));
+		}
+		
+	}
+	
+	public void populateSpellListView() {
 		
 	}
 

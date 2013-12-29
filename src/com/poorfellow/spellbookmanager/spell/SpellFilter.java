@@ -86,4 +86,8 @@ public class SpellFilter implements Serializable {
 
 		filteredSpellsMap.get(id).add(spellId);
 	}
+	
+	public Map<String, String> getFilterClassLevelMap() {
+		return filterClassLevelMap;
+	}
 }

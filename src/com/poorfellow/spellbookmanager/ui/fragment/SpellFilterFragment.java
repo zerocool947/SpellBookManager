@@ -68,8 +68,9 @@ public class SpellFilterFragment extends DialogFragment {
         mLevelTextView = (TextView) v.findViewById(R.id.levelText);
         mConfirmFilterButton = (Button) v.findViewById(R.id.confirmFilterButton);
         
+        //move these to the spell filter itself mapbe?
         final String[] classNames = {"Choose Class", "Cleric", "Paladin", "Wizard"};
-        final String[] levels = {"Choose Level", "All", "1", "2", "3"};
+        final String[] levels = {"All", "0", "1", "2", "3"};
         
         ArrayAdapter<String> classSpinnerAdapter = new ArrayAdapter<String>(this.getActivity(),
         		android.R.layout.simple_spinner_item, android.R.id.text1, classNames);
