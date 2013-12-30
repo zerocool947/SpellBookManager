@@ -107,9 +107,9 @@ public class SpellFilterFragment extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
-				if (mSpellFilter == null) {
-					mSpellFilter = new SpellFilter();
-				}
+				//put some logic around preserving filters. Until then, create a new one each time
+				
+				mSpellFilter = new SpellFilter();
 				//these calls need to stay here. consider the back button
 				populateFilter();
 				mCallback.deliverSpellFilter(mSpellFilter);

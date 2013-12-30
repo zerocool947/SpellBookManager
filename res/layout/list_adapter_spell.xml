@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:id="@+id/spellName" />
+        android:id="@+id/spellName"
+        android:paddingLeft="40dp" />
     <CheckBox android:id="@+id/addSpellCheckbox"
         android:layout_alignRight="@id/spellName"
         android:layout_width="wrap_content"

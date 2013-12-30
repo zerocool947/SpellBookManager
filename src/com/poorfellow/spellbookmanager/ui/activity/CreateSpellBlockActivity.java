@@ -1,7 +1,6 @@
 package com.poorfellow.spellbookmanager.ui.activity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 
 import com.poorfellow.spellbookmanager.R;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
@@ -44,10 +44,6 @@ public class CreateSpellBlockActivity extends Activity
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		if (mSpellFilter != null) {
-			Log.d("STATUS", "I'm filtering spells in on create!!!!");
-			mSpellFilter.filterRawSpells(this);
-		}
 
 		Log.d("STATUS", "I'm Creating the activity!!!!");
 
@@ -55,15 +51,18 @@ public class CreateSpellBlockActivity extends Activity
 		mSpellsMap = spellDAO.getAllRowsAsMap();
 		mSpellsIdsList = spellDAO.getAlllRowsIds();
 		
-		//get this list as just a list of Ids, add the DB method
-		//List<Integer> spellsList = spellDAO.getAlllRowsIds();
-		mSpellNamesList = new ArrayList<String>(mSpellsMap.values());
+		if (mSpellFilter == null) {
+			mSpellFilter = new SpellFilter(mSpellsIdsList, this);
+			mSpellFilter.addPreFilterClassLevel("Clr", "0,1,2,3,4");
+		}
 
-		Collections.sort(mSpellNamesList);		
+		//keeping around old adapter stuff
 		/*mSpellListAdapter = new SpellListAdapter(this, R.layout.list_adapter_spell, mSpellNamesList);
 		
 		ListView spellsList = (ListView) this.findViewById(R.id.selectSpellsList);
 		spellsList.setAdapter(mSpellListAdapter);*/
+		
+		updateSpellListView();
 		
 		mFilterButton = (Button) this.findViewById(R.id.filterSpellsButton);
 		mFilterButton.setOnClickListener(new View.OnClickListener() {
@@ -128,30 +127,20 @@ public class CreateSpellBlockActivity extends Activity
 
 	@Override
 	public void updateSpellListView() {
-		// TODO Auto-generated method stub
-		mFilterButton.setText("HOLY SHIT IT WORKS!");
+		// TODO Auto-generated method stub		
+		mSpellFilter.setFilterSpellList(mSpellsIdsList);
+		mSpellFilter.filterRawSpells();
 		
-		//fix once you get a real DB lookup
-		mSpellFilter.setFilterSpellMap(mSpellsIdsList);
-		mSpellFilter.filterRawSpells(this.getApplicationContext());
-		populateSpellListView();
-		
-	}
-	
-	public void populateSpellListView() {
 		mFilteredSpellsMap = mSpellFilter.getFilteredSpells();
 		mFilteredGroupsList = mSpellFilter.getFilteredGroups();
-		
-		for(Integer level : mFilteredGroupsList) {
-			Log.d("STATUS", "My filtered group Set value is " + level);
-		}
-		
-		List<Integer> test = new ArrayList<Integer>(mFilteredGroupsList);
-		Log.d("STATUS", "Atfer conversion to array");
-		for(Integer level : test) {
-			Log.d("STATUS", "My Filtered Group List value is " + level + " and the index is " + test.indexOf(level));
+
+		for (Integer levelGroup : mFilteredSpellsMap.keySet()) {
+			Log.d("STATUS", "My levels are thus " + levelGroup);
 
 		}
-	}
-
+		
+		mSpellListAdapter = new SpellListAdapter(this, mFilteredSpellsMap, new ArrayList<Integer>(mFilteredGroupsList));
+		ExpandableListView spellListView = (ExpandableListView) findViewById(R.id.selectSpellsList);
+		spellListView.setAdapter(mSpellListAdapter);
+	}	
 }

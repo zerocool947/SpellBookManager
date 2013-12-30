@@ -18,23 +18,31 @@ public class SpellFilter implements Serializable {
 	private Map<Integer, List<Integer>> filteredSpellsMap;
 	
 	//Key is absolute position (sequential), value is the level
-	private Set<Integer> filteredGroupsList; 
+	private Set<Integer> filteredGroupsList;
+	
+	//Key is the class, value is comma separated list of levels
 	private Map<String, String> filterClassLevelMap;
 	
 	//Key is the Id, string is the name
 	private List<Integer> preFilterSpellsList;
+	
+	private Context mContext;
 			
-	public SpellFilter(List<Integer> spells, Map<String, String> classLevels) {
+	public SpellFilter(List<Integer> spells, Map<String, String> classLevels, Context context) {
 		Log.d("STATUS", "Instantiating SpellFilter");
 		this.preFilterSpellsList = spells;
 		this.filterClassLevelMap = classLevels;
 		this.filteredSpellsMap = new HashMap<Integer, List<Integer>>();
 		this.filteredGroupsList = new TreeSet<Integer>();
-		
+		this.mContext = context;
+	}
+	
+	public SpellFilter(List<Integer> spells, Context context) {
+		this(spells, null, context);
 	}
 	
 	public SpellFilter() {
-		this(null, null);
+		this(null, null, null);
 	}
 	
 	/*
@@ -69,12 +77,13 @@ public class SpellFilter implements Serializable {
 		addPreFilterClassLevel(className, String.valueOf(level));
 	}
 	
-	public void setFilterSpellMap(List<Integer> spellMap) {
-		this.preFilterSpellsList = spellMap;
+	public void setFilterSpellList(List<Integer> spellList) {
+		this.preFilterSpellsList = spellList;
 	}
 	
-	public void filterRawSpells(Context context) {
-		SpellDAO spellDAO = new SpellDAO(context); 
+	public void filterRawSpells() {
+		//Make some damn database queries to make this method not suck
+		SpellDAO spellDAO = new SpellDAO(mContext); 
 		
 		for(String className : filterClassLevelMap.keySet()) {
 			String classLevels = filterClassLevelMap.get(className);
@@ -92,7 +101,8 @@ public class SpellFilter implements Serializable {
 			Map<String, Integer> spellClassLevels = spell.getLevel();
 			
 			for (String filterClass : filterClassLevelMap.keySet()) {
-				if(spellClassLevels.containsKey(filterClass.toLowerCase())) {
+				
+				if(spellClassLevels.containsKey(filterClass)) {
 					Integer filterLevel = spellClassLevels.get(filterClass);
 					if (filterClassLevelMap.get(filterClass).contains(Integer.toString(filterLevel))) {
 						addToFilteredSpellsMap(spellId, filterClass, filterLevel);
@@ -102,7 +112,7 @@ public class SpellFilter implements Serializable {
 		}
 	}
 
-	public void addToFilteredSpellsMap(Integer spellId, String filterClass, Integer filterLevel) {
+	private void addToFilteredSpellsMap(Integer spellId, String filterClass, Integer filterLevel) {
 		if (!filteredSpellsMap.containsKey(filterLevel)) {
 			filteredSpellsMap.put(filterLevel, new ArrayList<Integer>());
 		}

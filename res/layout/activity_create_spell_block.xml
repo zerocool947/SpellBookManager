@@ -39,14 +39,24 @@
 		android:layout_alignBottom="@id/createSpellBlockButton"
         android:text="Filter Spells" />
 
-    <ListView
+    <!--<ListView
+        android:id="@+id/selectSpellsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" 
+        android:layout_below="@id/createSpellBlockButton"
+        android:visibility="gone">
+    </ListView>-->
+    
+    <ExpandableListView
         android:id="@+id/selectSpellsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" 
         android:layout_below="@id/createSpellBlockButton">
-    </ListView>
+    </ExpandableListView>
 
     
 
