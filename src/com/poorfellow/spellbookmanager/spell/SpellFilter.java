@@ -85,6 +85,7 @@ public class SpellFilter implements Serializable {
 		//Make some damn database queries to make this method not suck
 		SpellDAO spellDAO = new SpellDAO(mContext); 
 		
+		//process the groups list
 		for(String className : filterClassLevelMap.keySet()) {
 			String classLevels = filterClassLevelMap.get(className);
 			
@@ -93,23 +94,24 @@ public class SpellFilter implements Serializable {
 			}
 		}
 		
+		Log.d("STATUS", "My prefiltered spells map is " + preFilterSpellsList);
+
 				
 		for(Integer spellId : preFilterSpellsList) {
 			//Make a retriever for just the class/level map
 			//or better yet, do the whole logic with a DB query
-			Spell spell = spellDAO.getSpellById(spellId);
-			Map<String, Integer> spellClassLevels = spell.getLevel();
-			
 			for (String filterClass : filterClassLevelMap.keySet()) {
+				int filterLevel = spellDAO.getLevelBySpellIdAndClass(spellId, filterClass);
+				//Log.d("STATUS", "My filtered level is " + filterLevel);
 				
-				if(spellClassLevels.containsKey(filterClass)) {
-					Integer filterLevel = spellClassLevels.get(filterClass);
-					if (filterClassLevelMap.get(filterClass).contains(Integer.toString(filterLevel))) {
-						addToFilteredSpellsMap(spellId, filterClass, filterLevel);
-					}
+				if (filterClassLevelMap.get(filterClass).contains(Integer.toString(filterLevel))) {
+					addToFilteredSpellsMap(spellId, filterClass, filterLevel);
 				}
 			}
 		}
+		
+		Log.d("STATUS", "My filtered spells map is " + filteredSpellsMap);
+
 	}
 
 	private void addToFilteredSpellsMap(Integer spellId, String filterClass, Integer filterLevel) {

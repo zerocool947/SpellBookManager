@@ -5,7 +5,6 @@ import java.util.Map;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +64,6 @@ public class SpellListAdapter extends BaseExpandableListAdapter {
 	public int getChildrenCount(int groupPosition) {
 		int level = mLevelGroupList.get(groupPosition);
 		List<Integer> spellList = mSpellLevelMap.get(level);
-		Log.d("STATUS", "I'm trying to get something for level " + level);
 
 		
 		return spellList.size();
@@ -90,8 +88,6 @@ public class SpellListAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
-		Log.d("STATUS", "My Group Position is " + getGroupCount());
-		Log.d("STATUS", "My Group Position is " + groupPosition);
 		View v = convertView;
 		
 		if (v == null) {

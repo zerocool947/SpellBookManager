@@ -40,6 +40,8 @@ public class CreateSpellBlockActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//Need to get the character object in here
+		
 		setContentView(R.layout.activity_create_spell_block);
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -48,8 +50,9 @@ public class CreateSpellBlockActivity extends Activity
 		Log.d("STATUS", "I'm Creating the activity!!!!");
 
 		SpellDAO spellDAO = new SpellDAO(this);
-		mSpellsMap = spellDAO.getAllRowsAsMap();
-		mSpellsIdsList = spellDAO.getAlllRowsIds();
+		mSpellsIdsList = spellDAO.getAllSpellIdsByClass("Clr");
+		Log.d("STATUS", "My list is this " + mSpellsIdsList);
+
 		
 		if (mSpellFilter == null) {
 			mSpellFilter = new SpellFilter(mSpellsIdsList, this);
@@ -127,8 +130,7 @@ public class CreateSpellBlockActivity extends Activity
 
 	@Override
 	public void updateSpellListView() {
-		// TODO Auto-generated method stub		
-		mSpellFilter.setFilterSpellList(mSpellsIdsList);
+		//mSpellFilter.setFilterSpellList(mSpellsIdsList);
 		mSpellFilter.filterRawSpells();
 		
 		mFilteredSpellsMap = mSpellFilter.getFilteredSpells();

@@ -272,7 +272,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 		return getSpellById(Long.valueOf(spellId));
 	}
 
-	public List<Integer> getAlllRowsIds() {
+	public List<Integer> getAlllSpellIds() {
 		db = DBHelper.getWritableDatabase();
 		List<Integer> spells = new ArrayList<Integer>();
 		Cursor spellCursor = null;
@@ -299,6 +299,70 @@ public class SpellDAO implements SpellBookDatabaseManager {
 		}
 		
 		return spells;
+	}
+	
+	public List<Integer> getAllSpellIdsByClass(String className) {
+		db = DBHelper.getWritableDatabase();
+		List<Integer> spells = new ArrayList<Integer>();
+		Cursor spellCursor = null;
+		String rawQuery = "SELECT s." + SPELL_TABLE_ROW_ID + " FROM " + SPELL_TABLE_NAME + " s " +
+						"INNER JOIN " + SPELL_CLASS_LEVEL_TABLE_NAME + " c on s." + 
+						SPELL_TABLE_ROW_ID + "=c." + SPELL_CLASS_LEVEL_ROW_SPELL_ID + 
+						" WHERE c." + SPELL_CLASS_LEVEL_ROW_CLASS + "=?";
+		
+		try {
+			spellCursor = db.rawQuery(rawQuery, new String[]{className});
+			spellCursor.moveToFirst();
+			
+			if (!spellCursor.isAfterLast()) {
+				do {
+					int id = spellCursor.getInt(0);
+					
+					spells.add(Integer.valueOf(id));
+				} while(spellCursor.moveToNext());
+			}
+			
+		} catch (SQLException e) {
+			Log.e("DB Error", e.toString());
+			e.printStackTrace();
+		}  finally {
+			spellCursor.close();
+			db.close();
+		}
+		
+		return spells;
+	}
+	
+	public int getLevelBySpellIdAndClass(Integer spellId, String className) {
+		//-1 means error
+		int level = -1; 
+		db = DBHelper.getWritableDatabase();
+		Cursor spellCursor = null;
+		String rawQuery = "SELECT c." + SPELL_CLASS_LEVEL_ROW_LEVEL + " FROM " + SPELL_CLASS_LEVEL_TABLE_NAME +
+						" s" + " INNER JOIN " + SPELL_CLASS_LEVEL_TABLE_NAME + " c on s." + 
+						SPELL_TABLE_ROW_ID + "=c." + SPELL_CLASS_LEVEL_ROW_SPELL_ID + 
+						" WHERE c." + SPELL_CLASS_LEVEL_ROW_CLASS + "=? AND s." + SPELL_TABLE_ROW_ID +
+						"=?";
+		//Log.d("STATUS", "My query is " + rawQuery);
+
+		
+		try {
+			spellCursor = db.rawQuery(rawQuery, new String[]{className, Integer.toString(spellId)});
+			spellCursor.moveToFirst();
+			
+			if (!spellCursor.isAfterLast()) {
+				level = spellCursor.getInt(0);
+				
+			}			
+		} catch (SQLException e) {
+			Log.e("DB Error", e.toString());
+			e.printStackTrace();
+		}  finally {
+			spellCursor.close();
+			db.close();
+		}
+		
+		return level;
 	}
 	
 	
