@@ -1,9 +1,6 @@
 package com.poorfellow.spellbookmanager.ui.activity;
 
 import com.poorfellow.spellbookmanager.R;
-import com.poorfellow.spellbookmanager.R.id;
-import com.poorfellow.spellbookmanager.R.layout;
-import com.poorfellow.spellbookmanager.R.menu;
 import com.poorfellow.spellbookmanager.character.CharacterDAO;
 
 import android.os.Bundle;

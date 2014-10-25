@@ -1,8 +1,6 @@
 package com.poorfellow.spellbookmanager.ui.activity;
 
 import com.poorfellow.spellbookmanager.R;
-import com.poorfellow.spellbookmanager.R.id;
-import com.poorfellow.spellbookmanager.R.layout;
 import com.poorfellow.spellbookmanager.ui.fragment.SpellDetailFragment;
 import com.poorfellow.spellbookmanager.ui.fragment.SpellListFragment;
 
@@ -87,7 +85,7 @@ public class SpellListActivity extends FragmentActivity implements
 			// adding or replacing the detail fragment using a
 			// fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putString(SpellDetailFragment.ARG_ITEM_ID, id);
+			arguments.putLong(SpellDetailFragment.ARG_ITEM_ID, Long.valueOf(id));
 			SpellDetailFragment fragment = new SpellDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
@@ -97,7 +95,7 @@ public class SpellListActivity extends FragmentActivity implements
 			// In single-pane mode, simply start the detail activity
 			// for the selected item ID.
 			Intent detailIntent = new Intent(this, SpellDetailActivity.class);
-			detailIntent.putExtra(SpellDetailFragment.ARG_ITEM_ID, id);
+			detailIntent.putExtra(SpellDetailFragment.ARG_ITEM_ID, Long.valueOf(id));
 			startActivity(detailIntent);
 		}
 	}

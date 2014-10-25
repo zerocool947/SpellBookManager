@@ -1,8 +1,6 @@
 package com.poorfellow.spellbookmanager.ui.activity;
 
 import com.poorfellow.spellbookmanager.R;
-import com.poorfellow.spellbookmanager.R.id;
-import com.poorfellow.spellbookmanager.R.layout;
 import com.poorfellow.spellbookmanager.ui.fragment.SpellDetailFragment;
 
 import android.content.Intent;
@@ -42,8 +40,8 @@ public class SpellDetailActivity extends FragmentActivity {
 			// Create the detail fragment and add it to the activity
 			// using a fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putString(SpellDetailFragment.ARG_ITEM_ID, getIntent()
-					.getStringExtra(SpellDetailFragment.ARG_ITEM_ID));
+			arguments.putLong(SpellDetailFragment.ARG_ITEM_ID, getIntent()
+					.getLongExtra(SpellDetailFragment.ARG_ITEM_ID, -1));
 			SpellDetailFragment fragment = new SpellDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()

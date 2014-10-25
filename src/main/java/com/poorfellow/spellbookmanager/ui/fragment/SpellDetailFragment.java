@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.poorfellow.spellbookmanager.R;
-import com.poorfellow.spellbookmanager.R.id;
-import com.poorfellow.spellbookmanager.R.layout;
 import com.poorfellow.spellbookmanager.spell.Spell;
 import com.poorfellow.spellbookmanager.spell.SpellDAO;
 import com.poorfellow.spellbookmanager.ui.activity.SpellDetailActivity;
@@ -53,7 +51,7 @@ public class SpellDetailFragment extends Fragment {
 			// to load content from a content provider.
 
 			SpellDAO spellDAO = new SpellDAO(this.getActivity());
-			mSpell = spellDAO.getSpellById(getArguments().getString(ARG_ITEM_ID));
+			mSpell = spellDAO.getSpellById(getArguments().getLong(ARG_ITEM_ID) + 1);
 		}
 	}
 
