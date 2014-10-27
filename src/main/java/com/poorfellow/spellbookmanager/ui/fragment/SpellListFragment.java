@@ -8,6 +8,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -90,9 +91,9 @@ public class SpellListFragment extends ListFragment {
 		
 		SpellDAO spellDAO = new SpellDAO(this.getActivity());
 		arrayAdapterMap = spellDAO.getAllRowsAsMap();
-		arrayAdapterSpells = new ArrayList<String>(arrayAdapterMap.values());
-		Collections.sort(arrayAdapterSpells);
-		final ArrayAdapter<String> spellsAdapter = new ArrayAdapter<String>(getActivity(),
+        arrayAdapterSpells = new ArrayList<String>(arrayAdapterMap.values());
+        //Collections.sort(arrayAdapterSpells);
+        final ArrayAdapter<String> spellsAdapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, android.R.id.text1, arrayAdapterSpells);
 		setListAdapter(spellsAdapter);
 	}
@@ -137,7 +138,9 @@ public class SpellListFragment extends ListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(position);
+        Log.d("INFO", "My position is " + position);
+        Log.d("INFO", "My id is " + id);
+		mCallbacks.onItemSelected(id);
 	}
 
 	@Override

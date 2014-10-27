@@ -1,4 +1,4 @@
-package com.poorfellow.spellbookmanager;
+package com.poorfellow.spellbookmanager.ui.activity;
 
 import android.test.ActivityInstrumentationTestCase2;
 import com.poorfellow.spellbookmanager.ui.activity.ManagerHome;
@@ -15,8 +15,12 @@ import com.poorfellow.spellbookmanager.ui.activity.ManagerHome;
  */
 public class ManagerHomeTest extends ActivityInstrumentationTestCase2<ManagerHome> {
 
-    public ManagerHomeTest() {
-        super("com.poorfellow.spellbookmanager", ManagerHome.class);
+
+    public ManagerHomeTest(Class<ManagerHome> activityClass) {
+        super(activityClass);
     }
 
+    public void testName() throws Exception {
+
+    }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -160,7 +161,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 	
 	public Map<Integer, String> getAllRowsAsMap() {
 		db = DBHelper.getWritableDatabase();
-		Map<Integer, String> spells = new HashMap<Integer, String>();
+		Map<Integer, String> spells = new TreeMap<Integer, String>();
 		Cursor spellCursor = null;
 		
 		try {
@@ -173,7 +174,6 @@ public class SpellDAO implements SpellBookDatabaseManager {
 				do {
 					int id = spellCursor.getInt(0);
 					String name = spellCursor.getString(1);
-					
 					spells.put(Integer.valueOf(id), name);
 				} while(spellCursor.moveToNext());
 			}
@@ -184,7 +184,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 			spellCursor.close();
 			db.close();
 		}
-		
+
 		return spells;
 	}
 

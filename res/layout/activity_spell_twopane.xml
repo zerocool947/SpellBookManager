@@ -22,7 +22,7 @@
     -->
 
     <fragment
-        android:id="@+id/spell_list"
+        android:id="@+id/master_spell_list"
         android:name="com.poorfellow.spellbookmanager.ui.fragment.SpellListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"

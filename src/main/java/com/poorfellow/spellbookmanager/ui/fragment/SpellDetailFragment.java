@@ -51,6 +51,7 @@ public class SpellDetailFragment extends Fragment {
 			// to load content from a content provider.
 
 			SpellDAO spellDAO = new SpellDAO(this.getActivity());
+
 			mSpell = spellDAO.getSpellById(getArguments().getLong(ARG_ITEM_ID) + 1);
 		}
 	}
