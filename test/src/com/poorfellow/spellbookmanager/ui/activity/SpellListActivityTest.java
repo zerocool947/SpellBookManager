@@ -42,9 +42,8 @@ public class SpellListActivityTest extends ActivityInstrumentationTestCase2<Spel
 
     public void testListOrder() throws Exception {
 
-        //Rewrite when I regenerate database
         for (DatabaseObject spell : mSpellDAO.getAllRows()) {
-            assertEquals(mListView.getItemAtPosition(((int) spell.getId())-1), spell.getName());
+            assertEquals(mListView.getItemAtPosition(((int) spell.getId())), spell.getName());
         }
 
         assertEquals(mSpellDAO.getAllRows().size(), mListView.getCount());

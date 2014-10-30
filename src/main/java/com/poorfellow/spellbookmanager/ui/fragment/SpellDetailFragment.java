@@ -52,7 +52,7 @@ public class SpellDetailFragment extends Fragment {
 
 			SpellDAO spellDAO = new SpellDAO(this.getActivity());
 
-			mSpell = spellDAO.getSpellById(getArguments().getLong(ARG_ITEM_ID) + 1);
+			mSpell = spellDAO.getSpellById(getArguments().getLong(ARG_ITEM_ID));
 		}
 	}
 
