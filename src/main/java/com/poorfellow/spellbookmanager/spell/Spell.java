@@ -19,6 +19,7 @@ public class Spell implements DatabaseObject, Serializable {
 	private String target;
 	private String range;
 	private String effect;
+    private String area;
 	private String duration;
 	private String savingThrow;
 	private String spellResistance;
@@ -31,7 +32,7 @@ public class Spell implements DatabaseObject, Serializable {
 	
 	public Spell(String name, String school, String subschool, String descriptor, 
 			Map<String, Integer> level, String components, String castingTime,
-			String target, String range, String effect, String duration, String savingThrow,
+			String target, String range, String effect, String area, String duration, String savingThrow,
 			String spellResistance, String description, String materialComponent,
 			String arcMaterialComponent, String focus, String arcFocus, String xpCost) {
 		
@@ -45,6 +46,7 @@ public class Spell implements DatabaseObject, Serializable {
 		this.target = target;
 		this.range = range;
 		this.effect = effect;
+        this.area = area;
 		this.duration = duration;
 		this.savingThrow = savingThrow;
 		this.spellResistance = spellResistance;
@@ -227,5 +229,12 @@ public class Spell implements DatabaseObject, Serializable {
 	public void setArcFocus(String arcFocus) {
 		this.arcFocus = arcFocus;
 	}
-	
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 }

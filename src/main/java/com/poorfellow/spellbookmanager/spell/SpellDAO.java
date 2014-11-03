@@ -30,13 +30,13 @@ public class SpellDAO implements SpellBookDatabaseManager {
 	
 	public Spell createSpell(String name, String school, String subschool, String descriptor, 
 			Map<String, Integer> level, String components, String castingTime,
-			String target, String range, String effect, String duration, String savingThrow,
+			String target, String range, String effect, String area, String duration, String savingThrow,
 			String spellResistance, String description, String materialComponent,
 			String arcMaterialComponent, String focus, String arcFocus, String xpCost) {
 		
 		
 		Spell newSpell = new Spell(name, school, subschool, descriptor, level, components, castingTime, 
-				target, range, effect, duration, savingThrow, spellResistance, description, 
+				target, range, effect, area, duration, savingThrow, spellResistance, description,
 				materialComponent, arcMaterialComponent, focus, arcFocus, xpCost);
 		long rowId = addRow(newSpell);
 		newSpell.setId(rowId);
@@ -106,6 +106,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					String target = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_TARGET));
 					String range = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_RANGE));
 					String effect = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_EFFECT));
+                    String area = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_AREA));
 					String duration = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_DURATION));
 					String savingThrow = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SAVING_THROW));
 					String spellResistance = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SPELL_RESISTANCE));
@@ -138,7 +139,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					}
 					
 					Spell spell = new Spell(name, school, subschool, descriptor, 
-							level, components, castingTime, target, range, effect, 
+							level, components, castingTime, target, range, effect, area,
 							duration, savingThrow, spellResistance, description, 
 							materialComponent, arcMaterialComponent, focus, arcFocus, xpCost);
 					
@@ -217,6 +218,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					String target = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_TARGET));
 					String range = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_RANGE));
 					String effect = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_EFFECT));
+                    String area = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_AREA));
 					String duration = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_DURATION));
 					String savingThrow = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SAVING_THROW));
 					String spellResistance = spellCursor.getString(spellCursor.getColumnIndex(SPELL_TABLE_ROW_SPELL_RESISTANCE));
@@ -247,7 +249,7 @@ public class SpellDAO implements SpellBookDatabaseManager {
 					}
 					
 					spell = new Spell(name, school, subschool, descriptor, 
-							level, components, castingTime, target, range, effect, 
+							level, components, castingTime, target, range, effect, area,
 							duration, savingThrow, spellResistance, description, 
 							materialComponent, arcMaterialComponent, focus, arcFocus, xpCost);
 					

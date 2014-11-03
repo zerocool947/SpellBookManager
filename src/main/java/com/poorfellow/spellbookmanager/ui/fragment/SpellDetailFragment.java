@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +101,9 @@ public class SpellDetailFragment extends Fragment {
 			if (mSpell.getEffect() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Effect: </b>" + mSpell.getEffect()));
 			}
+            if (mSpell.getArea() != null) {
+                spellDetail.append(Html.fromHtml("<br /><b>Area: </b>" + mSpell.getArea()));
+            }
 			if (mSpell.getDuration() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Duration: </b>" + mSpell.getDuration()));
 			}
@@ -111,8 +115,10 @@ public class SpellDetailFragment extends Fragment {
 			}
 			
 			spellDetail.append("\n");
+
+            Log.d("INFO", "my description is " + mSpell.getDescription());
 			
-			if (mSpell.getDescription() != null) {
+ 			if (mSpell.getDescription() != null) {
 				spellDetail.append(Html.fromHtml("<br /><b>Description: </b>" + mSpell.getDescription()));
 			}
 			if (mSpell.getMaterialComponent() != null) {

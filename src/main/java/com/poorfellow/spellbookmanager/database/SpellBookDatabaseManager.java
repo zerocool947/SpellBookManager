@@ -23,6 +23,7 @@ public interface SpellBookDatabaseManager {
 	public static final String SPELL_TABLE_ROW_CASTING_TIME = "casting_time";
 	public static final String SPELL_TABLE_ROW_TARGET = "target";
 	public static final String SPELL_TABLE_ROW_RANGE = "range";
+    public static final String SPELL_TABLE_ROW_AREA = "area";
 	public static final String SPELL_TABLE_ROW_EFFECT = "effect";
 	public static final String SPELL_TABLE_ROW_DURATION = "duration";
 	public static final String SPELL_TABLE_ROW_SAVING_THROW = "saving_throw";
