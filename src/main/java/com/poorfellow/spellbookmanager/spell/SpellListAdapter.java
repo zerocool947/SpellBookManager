@@ -1,15 +1,21 @@
 package com.poorfellow.spellbookmanager.spell;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.CompoundButton;
 
 import com.poorfellow.spellbookmanager.R;
 
@@ -20,12 +26,14 @@ public class SpellListAdapter extends BaseExpandableListAdapter {
 	private Map<Integer, List<Integer>> mSpellLevelMap;
 	private List<Integer> mLevelGroupList;
 	private SpellDAO mSpellDAO;
+	private Map<Integer, List<Integer>> mCheckedStates;
 
 	public SpellListAdapter(Context context, Map<Integer, List<Integer>> spellLevelMap, List<Integer> levelGroupList) {
 		this.mContext = context;
 		this.mSpellLevelMap = spellLevelMap;
 		this.mLevelGroupList = levelGroupList;
 		this.mSpellDAO = new SpellDAO(context);
+		this.mCheckedStates = new HashMap<Integer, List<Integer>>();
 	}
 
 	@Override
@@ -44,8 +52,10 @@ public class SpellListAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
+	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView,
 			ViewGroup parent) {
+		final int mGroupPosition = groupPosition;
+		final int mChildPosition = childPosition;
 		View v = convertView;
 		
 		if (v == null) {
@@ -56,6 +66,49 @@ public class SpellListAdapter extends BaseExpandableListAdapter {
 		final String childText = (String) getChild(groupPosition, childPosition);
 		TextView spellNameView = (TextView) v.findViewById(R.id.spellName);
 		spellNameView.setText(childText);
+
+		CheckBox childCheck = (CheckBox)v.findViewById(R.id.addSpellCheckbox);
+		childCheck.setOnCheckedChangeListener(null);
+		if (mCheckedStates.containsKey(groupPosition)) {
+			List<Integer> checkedChildrenPositions = mCheckedStates.get(groupPosition);
+			if (checkedChildrenPositions.contains(childPosition)) {
+				Log.d("CHECK", "I am checked " + childText);
+				childCheck.setChecked(true);
+			}
+			else {
+				Log.d("CHECK", "I am not checked " + childText);
+				childCheck.setChecked(false);
+			}
+		}
+		else {
+			mCheckedStates.put(groupPosition, new ArrayList<Integer>());
+		}
+
+		childCheck.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
+			   @Override
+			   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				   if (isChecked) {
+						if (mCheckedStates.containsKey(mGroupPosition)) {
+							mCheckedStates.get(mGroupPosition).add(Integer.valueOf(mChildPosition));
+						}
+					   else {
+							List<Integer> childList = new ArrayList<Integer>();
+							childList.add(mChildPosition);
+							mCheckedStates.put(mGroupPosition, childList);
+						}
+				   }
+				   else {
+					   if (mCheckedStates.containsKey(mGroupPosition)) {
+						   mCheckedStates.get(mGroupPosition).remove(Integer.valueOf(mChildPosition));
+					   }
+					   else {
+						   mCheckedStates.put(mGroupPosition, new ArrayList<Integer>());
+					   }
+
+				   }
+			   }
+		   }
+		);
 		
 		return v;
 	}
@@ -115,5 +168,6 @@ public class SpellListAdapter extends BaseExpandableListAdapter {
 		// when you do implement it, set it to check the box
 		return false;
 	}
+
 
 }

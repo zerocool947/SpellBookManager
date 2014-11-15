@@ -47,13 +47,10 @@ public class CreateSpellBlockActivity extends Activity
 		setupActionBar();
 		
 
-		Log.d("STATUS", "I'm Creating the activity!!!!");
-
 		SpellDAO spellDAO = new SpellDAO(this);
 		mSpellsIdsList = spellDAO.getAllSpellIdsByClass("Clr");
-		Log.d("STATUS", "My list is this " + mSpellsIdsList);
 
-		
+		//hardcoding for the time being
 		if (mSpellFilter == null) {
 			mSpellFilter = new SpellFilter(mSpellsIdsList, this);
 			mSpellFilter.addPreFilterClassLevel("Clr", "0,1,2,3,4");
@@ -125,7 +122,7 @@ public class CreateSpellBlockActivity extends Activity
 	@Override
 	public void deliverSpellFilter(SpellFilter spellFilter) {
 		this.mSpellFilter = spellFilter;
-		System.out.println("I got a spell filter!");
+		Log.d("STATUS", "Acquired spell filter.");
 	}
 
 	@Override
@@ -135,11 +132,6 @@ public class CreateSpellBlockActivity extends Activity
 		
 		mFilteredSpellsMap = mSpellFilter.getFilteredSpells();
 		mFilteredGroupsList = mSpellFilter.getFilteredGroups();
-
-		for (Integer levelGroup : mFilteredSpellsMap.keySet()) {
-			Log.d("STATUS", "My levels are thus " + levelGroup);
-
-		}
 		
 		mSpellListAdapter = new SpellListAdapter(this, mFilteredSpellsMap, new ArrayList<Integer>(mFilteredGroupsList));
 		ExpandableListView spellListView = (ExpandableListView) findViewById(R.id.selectSpellsList);

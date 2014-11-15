@@ -43,7 +43,7 @@ public class SpellListActivityTest extends ActivityInstrumentationTestCase2<Spel
     public void testListOrder() throws Exception {
 
         for (DatabaseObject spell : mSpellDAO.getAllRows()) {
-            assertEquals(mListView.getItemAtPosition(((int) spell.getId())), spell.getName());
+                assertEquals(mListView.getItemAtPosition(((int) spell.getId())), spell.getName());
         }
 
         assertEquals(mSpellDAO.getAllRows().size(), mListView.getCount());
